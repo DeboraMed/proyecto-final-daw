@@ -39,9 +39,6 @@ Para comenzar a utilizar Talent.Code, clona el repositorio desde GitHub, sigue l
 ## 📜 Licencia
 Talent.Code es un proyecto de código abierto bajo la licencia FreeCommon.
 
-## 📬 Contacto
-Si tienes preguntas o deseas colaborar con nosotros, no dudes en contactarnos a través de nuestro formulario de contacto.
-
 ---
 
 ¡Muchas gracias por usar **Talent.Code**! 😊
