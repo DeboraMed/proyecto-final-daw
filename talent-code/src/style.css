@@ -2,6 +2,7 @@
   font-family: "Istok Webed",Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 18px ;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -14,24 +15,30 @@
 }
 
 body {
+  padding-top: 0;
+  /*background-color: #f9f9f9;*/
+}
+
+/*body {
   margin: 0;
   display: flex;
   flex-direction: column;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
+}*/
+
 #app {
-  max-width: 90vh;
-  width: 100%;
+  max-width: 100vh;
+
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
 }
 
 
 /* Estilo de la APP */
 .container {
+  display: flex;
   flex: 1 0 auto;
   flex-grow: 1;
   width: 100%;
@@ -73,6 +80,17 @@ h1 {
   line-height: 1.1;
 }
 
+input {
+  background-color: #f0f0f0; /* Fondo gris claro */
+  color: #999; /* Texto gris oscuro */
+  width: 50%;
+  border: 1px #797474;
+  border-radius: 0.7rem;
+  padding: 0.625rem;
+  padding-left: 30px; /* Espacio para el icono */
+  margin: 1rem;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -94,6 +112,26 @@ button:focus-visible {
 
 .card {
   padding: 2em;
+}
+
+/* estilo del formulario */
+.form {
+  justify-self: center;
+  padding: 0 2rem;
+  margin: 0 2rem;
+  text-align: left;
+}
+
+/* reset estilo del fielset */
+body:not(:-moz-handler-blocked) fieldset {
+  display: table-cell;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  min-width: 0;
+  padding: 0.01em 0 0 0;
 }
 
 @media (prefers-color-scheme: light) {

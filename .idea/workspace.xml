@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/talent-code/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="Actualizando el README">
+      <change afterPath="$PROJECT_DIR$/talent-code/normalize.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/talent-code/public/logotipo-v1-favicon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Vue Composition API Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -35,29 +47,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Debora/Documents/proyecto_vue/proyecto-final-daw",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\Debora\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\233.14015.89\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Debora/Documents/proyecto_vue/proyecto-final-daw&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Debora\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\233.14015.89\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "vue.recent.templates": [
-      "Vue Composition API Component"
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Debora\Documents\proyecto_vue\proyecto-final-daw\talent-code\public" />
       <recent name="C:\Users\Debora\Documents\proyecto_vue\proyecto-final-daw" />
     </key>
   </component>
@@ -73,8 +86,18 @@
       <workItem from="1712909589133" duration="3858000" />
       <workItem from="1713377229137" duration="20090000" />
       <workItem from="1714066699646" duration="4763000" />
-      <workItem from="1714835015677" duration="2429000" />
+      <workItem from="1714835015677" duration="20901000" />
+      <workItem from="1715587524391" duration="6847000" />
     </task>
+    <task id="LOCAL-00001" summary="Actualizando el README">
+      <option name="closed" value="true" />
+      <created>1714837651629</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714837651629</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,5 +113,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Actualizando el README" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualizando el README" />
   </component>
 </project>

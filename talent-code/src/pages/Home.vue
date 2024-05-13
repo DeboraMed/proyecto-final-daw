@@ -70,6 +70,7 @@
 .home__carousel{
   display: flex;
   width: 100%;
+  padding-top: 4rem;
 }
 /*Estilo del slide*/
 /*body {
@@ -143,4 +144,4 @@ $animationSpeed: 40s;
     width: 250px;
   }
 }
-</style>b
+</style>

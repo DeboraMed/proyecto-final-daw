@@ -42,8 +42,8 @@ export default {
     <!-- Menu normal-->
     <div v-if="!windowSmall" class="navbar__content">
       <router-link to="/">
-        <div v-if="themeStore.theme === 'dark'"><img src="../assets/logotipo-v2-positivo.svg" class="nav__logo" alt="talent.code"></div>
-        <div v-else><img src="../assets/logotipo-v2-negativo.svg" alt="talent.code"></div>
+        <div v-if="themeStore.theme === 'dark'"><img src="../assets/logotipo-v2-negativo-horizontal.svg" class="nav__logo" alt="talent.code"></div>
+        <div v-else><img src="../assets/logotipo-v2-positivo-horizontal.svg" alt="talent.code"></div>
       </router-link>
       <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
       <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
@@ -134,6 +134,7 @@ export default {
 
 .nav__logo {
   margin-top: 0.5rem;
+  margin-right: 1rem;
   animation: palpito 2s ease 0s 1 normal forwards;
 }
 
@@ -150,7 +151,8 @@ export default {
 }
 img {
   height: 4rem;
-  margin-left: 1rem;
+  /*margin-left: 1rem;*/
+  margin-right: 1rem;
 }
 /*navbar medias*/
 @media screen and (max-width: 1200px) {
