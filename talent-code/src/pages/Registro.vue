@@ -14,8 +14,6 @@ export default {
   data() {
     /*tipo desarrollador y empresa*/
     return {
-      selectContractOptions: [],
-      //selectedOption: null,
       developer: {
         name: '',
         email: '',
@@ -25,17 +23,12 @@ export default {
         phone: '',
         address: '',
         avatar: '',
-        contract_type: [],
-        work_mode: '',
-        schedule: '',
-        specialization: '',
-        github_url: '',
       },
       company: {
         name: '',
         email: '',
         password: '',
-        user_type: '',
+        user_type: 'empresa',
         description: '',
         phone: '',
         address: '',
@@ -44,18 +37,14 @@ export default {
       userType: 'desarrollador', // 'desarrollador' o 'empresa'
     }
   },
-  async created() {
-    await this.selectStore.fetchSelectContractOptions();
-    this.selectContractOptions = this.selectStore.contractSelectData;
-  },
   methods: {
     validateForm(field) {
       // logica de validacion de formularios
     },
     async submitForm() {
       // TODO: validar los formularios
-      this.validateForm('name', 'email', 'password', 'user_type', 'description', 'phone', 'address',
-          'avatar', 'contract_type', 'work_mode', 'schedule', 'specialization', 'github_url');
+      this.validateForm('name', 'email', 'password', 'user_type',
+          'description', 'phone', 'address', 'avatar');
 
       // aqui llamar el UserStore
       this.userStore.register(this.developer);
@@ -85,49 +74,36 @@ export default {
       <div v-if="userType === 'desarrollador'">
         <h2>Formulario de registro de desarrollador</h2>
         <form class="form" @submit.prevent="registerDeveloper">
-            <input type="text"
-                   v-model="developer.name"
-                   placeholder="Nombre"/>
-            <input type="email"
-                   v-model="developer.email"
-                   placeholder="Correo electrónico"/>
-            <input type="password"
-                   v-model="developer.password"
-                   placeholder="Contraseña"/>
-            <input type="text"
-                   v-model="developer.description"
-                   placeholder="Front developer especialista en..."/>
-            <input type="text"
-                   v-model="developer.phone"
-                   placeholder="Teléfono"/>
-            <input type="text"
-                   v-model="developer.address"
-                   placeholder="Dirección"/>
-            <select v-model="developer.contract_type">
-              <option
-                  v-for="option in selectContractOptions"
-                  :key="option.value"
-                  :value="option.value">{{ option.label }}
-              </option>
-            </select>
-            <input type="text"
-                   v-model="developer.work_mode"
-                   placeholder="Modalidad"/>
-            <input type="text"
-                   v-model="developer.schedule"
-                   placeholder="Jornada preferida"/>
-            <input type="text"
-                   v-model="developer.specialization"
-                   placeholder="Especialización"/>
-            <input type="url"
-                   v-model="developer.github_url"
-                   placeholder="Github URL"/>
-            <input type="url"
-                   v-model="developer.avatar"
-                   placeholder="Avatar"/>
-  <!--          <input type="file"
-                   @change="previewFiles"
-                   placeholder="Avatar"/>-->
+          <input type="text"
+                 id="nombre"
+                 v-model="developer.name"
+                 placeholder="Nombre"/>
+          <input type="email"
+                 id="email"
+                 v-model="developer.email"
+                 placeholder="Correo electrónico"/>
+          <input type="password"
+                 id="password"
+                 v-model="developer.password"
+                 placeholder="Contraseña"/>
+          <input type="text"
+                 id="descripcion"
+                 v-model="developer.description"
+                 placeholder="Escribe una pequeña descripción..."/>
+          <input type="text"
+                 id="telefono"
+                 v-model="developer.phone"
+                 placeholder="Teléfono"/>
+          <input type="text"
+                 id="direccion"
+                 v-model="developer.address"
+                 placeholder="Dirección"/>
+          <input type="url"
+                 v-model="developer.avatar"
+                 placeholder="Avatar"/>
+     <!-- <input type="file"
+                 @change="previewFiles"
+                 placeholder="Avatar"/>-->
           <button type="submit" class="form__button">Registrarse</button>
         </form>
       </div>
@@ -137,25 +113,25 @@ export default {
         <h2>Registro de Empresa</h2>
         <form class="form" @submit.prevent="registerCompany">
           <!-- Pestaña de información básica -->
-            <input type="text"
-                   v-model="company.name"
-                   placeholder="Nombre de la empresa"/>
-            <input type="email"
-                   v-model="company.email"
-                   placeholder="Correo electrónico"/>
-            <input type="password"
-                   v-model="company.password"
-                   placeholder="Contraseña"/>
-            <input type="text"
-                   v-model="company.description"
-                   placeholder="Empresa ubicada en..."/>
+          <input type="text"
+                 v-model="company.name"
+                 placeholder="Nombre de la empresa"/>
+          <input type="email"
+                 v-model="company.email"
+                 placeholder="Correo electrónico"/>
+          <input type="password"
+                 v-model="company.password"
+                 placeholder="Contraseña"/>
+          <input type="text"
+                 v-model="company.description"
+                 placeholder="Empresa ubicada en..."/>
 
-            <input type="number"
-                   v-model="company.phone"
-                   placeholder="Teléfono"/>
-            <input type="text"
-                   v-model="company.address"
-                   placeholder="Dirección"/>
+          <input type="number"
+                 v-model="company.phone"
+                 placeholder="Teléfono"/>
+          <input type="text"
+                 v-model="company.address"
+                 placeholder="Dirección"/>
           <input type="file"
                  @change="previewFiles"
                  placeholder="Avatar"/>

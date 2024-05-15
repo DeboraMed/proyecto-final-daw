@@ -21,11 +21,11 @@ export const useUserStore = defineStore( 'user', {
                 'phone': developer.phone,
                 'address': developer.address,
                 'avatar': developer.avatar,
-                'contract_type': developer.contract_type,
+                /*'contract_type': developer.contract_type,
                 'work_mode': developer.work_mode,
                 'schedule':developer.schedule,
                 'specialization': developer.specialization,
-                'github_url':developer.github_url,
+                'github_url':developer.github_url,*/
             };
             axios.post('http://localhost:8000/api/v1/register',json)
                 .then(data => {
