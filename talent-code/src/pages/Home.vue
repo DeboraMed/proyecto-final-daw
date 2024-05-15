@@ -7,8 +7,13 @@
     <div class="home__title">“Exhibe tu talento, expande tus horizontes”</div>
     <div class="home__subtitle">Descubre a los mejores Desarrolladores en TalentCode </div>
     <section>
-      <button class="home__button">Oportunidades Laborales</button>
-      <button class="home__button">Contratar a un desarrollador</button>
+      <router-link to="/empleo" custom v-slot="{ navigate }">
+        <button class="home__button" @click="navigate" role="link">Oportunidades Laborales</button>
+      </router-link>
+<!--      TODO: poner condicional si esta logueado y si es empresa-->
+      <router-link to="/recluta" custom v-slot="{ navigate }">
+        <button class="home__button" @click="navigate" role="link">Contratar a un desarrollador</button>
+      </router-link>
     </section>
     <section class="home__carousel">
       <div class="slider">

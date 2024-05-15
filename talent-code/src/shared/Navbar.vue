@@ -36,6 +36,7 @@ export default {
 
 <template>
 <section>
+<!--  TODO: mostrar opciones segun logueado y segun tipo de usuario-->
   <nav class="nav">
     <!--logotipo-->
 
@@ -66,7 +67,7 @@ export default {
       </div>
       <dark-mode/>
     </div>
-    <!-- Falta añadir el menu burguer aqui -->
+    <!-- TODO: Falta añadir el menu burguer aqui -->
   </nav>
 </section>
 </template>
