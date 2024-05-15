@@ -51,7 +51,7 @@ export default {
 
     },
     registerDeveloper() {
-      // Lógica de registro para trabajadores
+      // Lógica de registro para developers
       this.userStore.register(this.developer);
 
     },
@@ -74,67 +74,119 @@ export default {
       <div v-if="userType === 'desarrollador'">
         <h2>Formulario de registro de desarrollador</h2>
         <form class="form" @submit.prevent="registerDeveloper">
-          <input type="text"
-                 id="nombre"
-                 v-model="developer.name"
-                 placeholder="Nombre"/>
-          <input type="email"
-                 id="email"
-                 v-model="developer.email"
-                 placeholder="Correo electrónico"/>
-          <input type="password"
-                 id="password"
-                 v-model="developer.password"
-                 placeholder="Contraseña"/>
-          <input type="text"
-                 id="descripcion"
-                 v-model="developer.description"
-                 placeholder="Escribe una pequeña descripción..."/>
-          <input type="text"
-                 id="telefono"
-                 v-model="developer.phone"
-                 placeholder="Teléfono"/>
-          <input type="text"
-                 id="direccion"
-                 v-model="developer.address"
-                 placeholder="Dirección"/>
-          <input type="url"
-                 v-model="developer.avatar"
-                 placeholder="Avatar"/>
-     <!-- <input type="file"
-                 @change="previewFiles"
-                 placeholder="Avatar"/>-->
+          <fieldset>
+            <label for="nombre">Nombre</label>
+            <input type="text"
+                   id="nombre"
+                   v-model="developer.name"
+                   placeholder="Nombre"/>
+          </fieldset>
+          <fieldset>
+            <label for="email">Email</label>
+            <input type="email"
+                   id="email"
+                   v-model="developer.email"
+                   placeholder="Correo electrónico"/>
+          </fieldset>
+          <fieldset>
+            <label for="password">Contraseña</label>
+            <input type="password"
+                   id="password"
+                   v-model="developer.password"
+                   placeholder="Contraseña"/>
+          </fieldset>
+          <fieldset>
+            <label for="descripcion">Descripción</label>
+            <input type="text"
+                   id="descripcion"
+                   v-model="developer.description"
+                   placeholder="Escribe una pequeña descripción..."/>
+          </fieldset>
+          <fieldset>
+            <label for="telefono">Teléfono</label>
+            <input type="text"
+                   id="telefono"
+                   v-model="developer.phone"
+                   placeholder="Teléfono"/>
+          </fieldset>
+          <fieldset>
+            <label for="direccion">Direccion</label>
+            <input type="text"
+                   id="direccion"
+                   v-model="developer.address"
+                   placeholder="Dirección"/>
+          </fieldset>
+          <fieldset>
+            <label for="avatar">Avatar</label>
+            <input type="url"
+                   id="avatar"
+                   v-model="developer.avatar"
+                   placeholder="Avatar"/>
+          </fieldset>
+          <!-- <input type="file"
+                      @change="previewFiles"
+                      placeholder="Avatar"/>-->
           <button type="submit" class="form__button">Registrarse</button>
         </form>
       </div>
 
       <!-- Formulario de registro para empresas -->
       <div v-if="userType === 'empresa'">
-        <h2>Registro de Empresa</h2>
+        <h2>Formulario de registro de Empresa</h2>
         <form class="form" @submit.prevent="registerCompany">
           <!-- Pestaña de información básica -->
-          <input type="text"
-                 v-model="company.name"
-                 placeholder="Nombre de la empresa"/>
-          <input type="email"
-                 v-model="company.email"
-                 placeholder="Correo electrónico"/>
-          <input type="password"
-                 v-model="company.password"
-                 placeholder="Contraseña"/>
-          <input type="text"
-                 v-model="company.description"
-                 placeholder="Empresa ubicada en..."/>
-
-          <input type="number"
-                 v-model="company.phone"
-                 placeholder="Teléfono"/>
-          <input type="text"
-                 v-model="company.address"
-                 placeholder="Dirección"/>
-          <input type="file"
-                 @change="previewFiles"
-                 placeholder="Avatar"/>
+          <fieldset>
+            <label for="nombre">Nombre</label>
+            <input type="text"
+                   id="nombre"
+                   v-model="company.name"
+                   placeholder="Nombre de la empresa"/>
+          </fieldset>
+          <fieldset>
+            <label for="email">Email</label>
+            <input type="email"
+                   id="email"
+                   v-model="company.email"
+                   placeholder="Correo electrónico"/>
+          </fieldset>
+          <fieldset>
+            <label for="contraseña">Contraseña</label>
+            <input type="password"
+                   id="contraseña"
+                   v-model="company.password"
+                   placeholder="Contraseña"/>
+          </fieldset>
+          <fieldset>
+            <label for="descripcion">Descripcion</label>
+            <input type="text"
+                   id="descripcion"
+                   v-model="company.description"
+                   placeholder="Descripción de la empresa..."/>
+          </fieldset>
+          <fieldset>
+            <label for="telefono">Teléfono</label>
+            <input type="number"
+                   id="telefono"
+                   v-model="company.phone"
+                   placeholder="Teléfono"/>
+          </fieldset>
+          <fieldset>
+            <label for="direccion">Dirección</label>
+            <input type="text"
+                   id="direccion"
+                   v-model="company.address"
+                   placeholder="Dirección"/>
+          </fieldset>
+          <fieldset>
+            <label for="avatar">Avatar</label>
+            <input type="url"
+                   id="avatar"
+                   v-model="company.avatar"
+                   placeholder="Avatar"/>
+          </fieldset>
+          <!-- <input type="file"
+                      @change="previewFiles"
+                      placeholder="Avatar"/>-->
           <button type="submit" class="form__button">Registrarse</button>
         </form>
       </div>

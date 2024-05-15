@@ -70,7 +70,7 @@ export const useUserStore = defineStore( 'user', {
                 .then(data => {
                     console.log(data, data.data)
                     if (data.statusText === "OK") {
-                        this.userData = data.data
+                        this.userData = data.data.user
                     }
                 })
                 .catch(error => {

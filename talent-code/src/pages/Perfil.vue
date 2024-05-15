@@ -4,26 +4,17 @@ import {useUserStore} from '../stores/UserStore.js';
 import {useSelectStore} from "../stores/SelectStore.js";
 
 export default {
-  setup(){
+  setup() {
     const selectStore = useSelectStore();
     const userStore = useUserStore();
-
-    onMounted(async () => {
-      await userStore.fetchUser();
-    });
-
-    const userData = computed(() => {
-      return userStore.userData;
-    });
 
     return {
       selectStore,
       userStore,
-      userData
     }
   },
 
-  data(){
+  data() {
     return {
       perfilPendiente: true,
       selectContractOptions: [],
@@ -33,6 +24,7 @@ export default {
       selectAcademicOptions: [],
       selectExperienceOptions: [],
       selectTechnologyOptions: [],
+      userData: null,
       developer: {
         contract_type: '',
         schedule: '',
@@ -67,98 +59,143 @@ export default {
     // tipos de tecnologias
     await this.selectStore.fetchSelectTechnologyOptions();
     this.selectTechnologyOptions = this.selectStore.technologySelectData;
+    await this.userStore.fetchUser();
+    this.userData = this.userStore.userData;
+  },
+  methods: {
+    additionalProfileFields() {
+      // registro de los campos extra
+      this.userStore.register(this.developer);
+    }
   },
 }
-
-//TODO: el perfil no carga la info del usuario
 </script>
 
 <template>
-  <div>Perfil de usuario</div>
-  <article>
-    <h2>Bienvenid@ <span>{{ userData.name }}</span></h2>
-    Hola, {{ userData.name}} Bienvenido a Talent.Code<br>
-    Tu email: {{ userData.email }}<br>
-    <button class="button" @click="userStore.logout()">Cerrar sesión</button>
-  </article>
+  <main>
+    <section class="container__form">
+      <div>Perfil de usuario</div>
+      <article v-if="userData">
+        <h2>Bienvenid@ <span>{{ userData.name }}</span></h2>
+        Hola, {{ userData.name }} Bienvenido a Talent.Code<br>
+        Tu email: {{ userData.email }}<br>
+        <button class="button" @click="userStore.logout()">Cerrar sesión</button>
+      </article>
 
-  <!--  TODO: comprobar que el formulario sale si los campos no estan rellenos-->
-  <div v-if="perfilPendiente">
-    <h2>Formulario de preferencias laborales</h2>
-    <form class="form" @submit.prevent="additionalProfileFields">
-      <select v-model="developer.contract_type">
-        <option disabled value="">Selecciona un tipo de contrato</option>
-        <option
-            id="contrato"
-            v-for="option in selectContractOptions"
-            :key="option.value"
-            :value="option.value">{{ option.label }}
-        </option>
-      </select>
-      <select v-model="developer.schedule">
-        <option disabled value="">Selecciona un tipo de jornada</option>
-        <option
-            id="jornada"
-            v-for="option in selectScheduleOptions"
-            :key="option.value"
-            :value="option.value">{{ option.label }}
-        </option>
-      </select>
-      <select v-model="developer.specialization">
-        <option disabled value="">Selecciona una especialidad</option>
-        <option
-            id="especialidad"
-            v-for="option in selectSpecializationOptions"
-            :key="option.value"
-            :value="option.value">{{ option.label }}
-        </option>
-      </select>
-      <select v-model="developer.work_mode">
-        <option disabled value="">Selecciona una modalidad de trabajo</option>
-        <option
-            id="modalidad"
-            v-for="option in selectWorkOptions"
-            :key="option.value"
-            :value="option.value">{{ option.label }}
-        </option>
-      </select>
-      <select v-model="developer.academic_level">
-        <option disabled value="">Selecciona un nivel académico</option>
-        <option
-            id="estudios"
-            v-for="option in selectAcademicOptions"
-            :key="option.value"
-            :value="option.value">{{ option.label }}
-        </option>
-      </select>
-      <select v-model="developer.experience_level">
-        <option disabled value="">Selecciona un nivel de experiencia</option>
-        <option
-            id="experiencia"
-            v-for="option in selectExperienceOptions"
-            :key="option.value"
-            :value="option.value">{{ option.label }}
-        </option>
-      </select>
-      <select v-model="developer.technology_type">
-        <option disabled value="">Selecciona una tecnología</option>
-        <option
-            id="tecnologias"
-            v-for="option in selectTechnologyOptions"
-            :key="option.value"
-            :value="option.value">{{ option.label }}
-        </option>
-      </select>
-      <input type="url"
-             id="github"
-             v-model="developer.github_url"
-             placeholder="Github URL"/>
+      <!--  TODO: validar los formularios -->
+      <div v-if="perfilPendiente">
+        <h2>Formulario de preferencias laborales</h2>
+        <form class="form" @submit.prevent="additionalProfileFields">
+          <select class="home__select" v-model="developer.contract_type">
+            <option class="home__select__option" disabled value="">Selecciona un tipo de contrato</option>
+            <option class="home__select__option"
+                    id="contrato"
+                    v-for="option in selectContractOptions"
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <select class="home__select" v-model="developer.schedule">
+            <option class="home__select__option" disabled value="">Selecciona un tipo de jornada</option>
+            <option class="home__select__option"
+                    id="jornada"
+                    v-for="option in selectScheduleOptions"
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <select class="home__select" v-model="developer.specialization">
+            <option class="home__select__option" disabled value="">Selecciona una especialidad</option>
+            <option class="home__select__option"
+                    id="especialidad"
+                    v-for="option in selectSpecializationOptions"
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <select class="home__select" v-model="developer.work_mode">
+            <option class="home__select__option" disabled value="">Selecciona una modalidad de trabajo</option>
+            <option class="home__select__option"
+                    id="modalidad"
+                    v-for="option in selectWorkOptions"
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <select class="home__select" v-model="developer.academic_level">
+            <option class="home__select__option" disabled value="">Selecciona un nivel académico</option>
+            <option class="home__select__option"
+                    id="estudios"
+                    v-for="option in selectAcademicOptions"
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <select class="home__select" v-model="developer.experience_level">
+            <option class="home__select__option" disabled value="">Selecciona un nivel de experiencia</option>
+            <option class="home__select__option"
+                    id="experiencia"
+                    v-for="option in selectExperienceOptions"
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <select class="home__select" v-model="developer.technology_type">
+            <option class="home__select__option" disabled value="">Selecciona una tecnología</option>
+            <option class="home__select__option"
+                    id="tecnologias"
+                    v-for="option in selectTechnologyOptions"
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <input type="url"
+                 id="github"
+                 v-model="developer.github_url"
+                 placeholder="Github URL"/>
+          <button type="submit" class="form__button">Registrarse</button>
+        </form>
 
-    </form>
-
-  </div>
+      </div>
+    </section>
+  </main>
 </template>
 
 <style scoped>
+.home__select {
+  width: 14.8rem;
+  height: fit-content;
+  border: 1px #797474;
+  border-radius: 0.7rem;
+  padding: 0.625rem 0.625rem;
+  margin: 0.625rem 0;
+}
 
+.home__select__option {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 4;
+}
+.container__form {
+  margin-top: 5rem;
+}
+
+.form__button {
+  background-color: black;
+  border-radius: 99999px;
+  color: #FFF8E8;
+  /* margin-top: 20px;*/
+  width: 100%;
+  height: 56px;
+  padding: 24px;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+.form__button:hover {
+  background-color: #808080;
+  /*color: #000000;*/
+}
 </style>

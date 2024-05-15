@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: select de formularios y selectStore">
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: formulario de perfil">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Inspiracion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Inspiracion.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Recluta.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Recluta.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/stores/SelectStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/SelectStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" afterDir="false" />
@@ -79,7 +85,7 @@
       <workItem from="1713377229137" duration="20090000" />
       <workItem from="1714066699646" duration="4763000" />
       <workItem from="1714835015677" duration="20901000" />
-      <workItem from="1715587524391" duration="40030000" />
+      <workItem from="1715587524391" duration="44454000" />
     </task>
     <task id="LOCAL-00001" summary="Actualizando el README">
       <option name="closed" value="true" />
@@ -105,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715768469135</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: formulario de perfil">
+      <option name="closed" value="true" />
+      <created>1715790410786</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715790410786</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +140,7 @@
     <MESSAGE value="Actualizando el README" />
     <MESSAGE value="feat: formularios y UserStore" />
     <MESSAGE value="feat: select de formularios y selectStore" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: select de formularios y selectStore" />
+    <MESSAGE value="feat: formulario de perfil" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: formulario de perfil" />
   </component>
 </project>

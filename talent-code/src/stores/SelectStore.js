@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 import axios from "axios";
 
 export const useSelectStore = defineStore( 'select', {
-    state:() => ({
+    state: () => ({
         contractSelectData: JSON.parse(localStorage.getItem('contractSelectData')),
         scheduleSelectData: JSON.parse(localStorage.getItem('scheduleSelectData')),
         specializationSelectData: JSON.parse(localStorage.getItem('specializationSelectData')),
@@ -13,10 +13,13 @@ export const useSelectStore = defineStore( 'select', {
     }),
     actions: {
         async fetchSelectContractOptions() {
-            if(!this.contractSelectData) {
+            if (!this.contractSelectData) {
                 await axios.get('http://localhost:8000/api/v1/contract-type')
                     .then(response => {
-                        this.contractSelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
+                        this.contractSelectData = Object.entries(response.data).map(([value, label]) => ({
+                            value,
+                            label
+                        }));
                         localStorage.setItem('contractSelectData', JSON.stringify(this.contractSelectData));
                     })
                     .catch(error => {
@@ -25,10 +28,13 @@ export const useSelectStore = defineStore( 'select', {
             }
         },
         async fetchSelectScheduleOptions() {
-            if(!this.scheduleSelectData) {
+            if (!this.scheduleSelectData) {
                 await axios.get('http://localhost:8000/api/v1/schedule')
                     .then(response => {
-                        this.scheduleSelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
+                        this.scheduleSelectData = Object.entries(response.data).map(([value, label]) => ({
+                            value,
+                            label
+                        }));
                         localStorage.setItem('scheduleSelectData', JSON.stringify(this.scheduleSelectData));
                     })
                     .catch(error => {
@@ -37,10 +43,13 @@ export const useSelectStore = defineStore( 'select', {
             }
         },
         async fetchSelectSpecializationOptions() {
-            if(!this.specializationSelectData) {
+            if (!this.specializationSelectData) {
                 await axios.get('http://localhost:8000/api/v1/specialization')
                     .then(response => {
-                        this.specializationSelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
+                        this.specializationSelectData = Object.entries(response.data).map(([value, label]) => ({
+                            value,
+                            label
+                        }));
                         localStorage.setItem('specializationSelectData', JSON.stringify(this.specializationSelectData));
                     })
                     .catch(error => {
@@ -49,7 +58,7 @@ export const useSelectStore = defineStore( 'select', {
             }
         },
         async fetchSelectWorkOptions() {
-            if(!this.workSelectData) {
+            if (!this.workSelectData) {
                 await axios.get('http://localhost:8000/api/v1/work-mode')
                     .then(response => {
                         this.workSelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
@@ -61,10 +70,13 @@ export const useSelectStore = defineStore( 'select', {
             }
         },
         async fetchSelectAcademicOptions() {
-            if(!this.academicSelectData) {
+            if (!this.academicSelectData) {
                 await axios.get('http://localhost:8000/api/v1/academic-level')
                     .then(response => {
-                        this.academicSelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
+                        this.academicSelectData = Object.entries(response.data).map(([value, label]) => ({
+                            value,
+                            label
+                        }));
                         localStorage.setItem('academicSelectData', JSON.stringify(this.academicSelectData));
                     })
                     .catch(error => {
@@ -73,10 +85,13 @@ export const useSelectStore = defineStore( 'select', {
             }
         },
         async fetchSelectExperienceOptions() {
-            if(!this.experienceSelectData) {
+            if (!this.experienceSelectData) {
                 await axios.get('http://localhost:8000/api/v1/experience-level')
                     .then(response => {
-                        this.experienceSelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
+                        this.experienceSelectData = Object.entries(response.data).map(([value, label]) => ({
+                            value,
+                            label
+                        }));
                         localStorage.setItem('experienceSelectData', JSON.stringify(this.experienceSelectData));
                     })
                     .catch(error => {
@@ -85,10 +100,13 @@ export const useSelectStore = defineStore( 'select', {
             }
         },
         async fetchSelectTechnologyOptions() {
-            if(!this.technologySelectData) {
+            if (!this.technologySelectData) {
                 await axios.get('http://localhost:8000/api/v1/technology-type')
                     .then(response => {
-                        this.technologySelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
+                        this.technologySelectData = Object.entries(response.data).map(([value, label]) => ({
+                            value,
+                            label
+                        }));
                         localStorage.setItem('technologySelectData', JSON.stringify(this.technologySelectData));
                     })
                     .catch(error => {
