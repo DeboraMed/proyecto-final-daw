@@ -10,11 +10,11 @@ onMounted(async () => {
 const userData = computed(() => {
   return userStore.userData;
 });
+//TODO: el perfil no carga la info del usuario
 </script>
 
 <template>
 <div>Perfil de usuario</div>
-
   <article>
     <h2>Bienvenid@ <span>{{ userData.name }}</span></h2>
     Hola, {{ userData.name }} Bienvenido a Talent.Code<br>

@@ -4,28 +4,28 @@ import router from "../router/router.js"
 
 export const useUserStore = defineStore( 'user', {
     state:() => ({
-        //token: localStorage.getItem('token'),
-        token: '6|qwncmNVuom8VtqMrgzFTxv5wvxJLdLJrPoyg3mJHeb8944ab',
-        userData: ['User Test',]
+        token: localStorage.getItem('token'),
+        userData: []
     }),
     actions: {
-        /*isLogged(){
+        isLogged(){
             return this.token !== null
-        },*/
-        register(name,email,password,user_type,description,phone,address,avatar,contract_type,work_mode,schedule,specialization,github_url){
+        },
+        register(developer){
             let json = {
-                'name': name,
-                'password': password,
-                'user_type': user_type,
-                'description': description,
-                'phone': phone,
-                'address': address,
-                'avatar': avatar,
-                'contract_type': contract_type,
-                'work_mode': work_mode,
-                'schedule':schedule,
-                'specialization': specialization,
-                'github_url':github_url,
+                'name': developer.name,
+                'email':developer.email,
+                'password': developer.password,
+                'user_type': developer.user_type,
+                'description': developer.description,
+                'phone': developer.phone,
+                'address': developer.address,
+                'avatar': developer.avatar,
+                'contract_type': developer.contract_type,
+                'work_mode': developer.work_mode,
+                'schedule':developer.schedule,
+                'specialization': developer.specialization,
+                'github_url':developer.github_url,
             };
             axios.post('http://localhost:8000/api/v1/register',json)
                 .then(data => {
@@ -53,7 +53,7 @@ export const useUserStore = defineStore( 'user', {
                         this.token = data.data.token;
                         // guarda el token en el localstorage
                         localStorage.setItem('token', this.token);
-                        console.log('Se ha logueado correctamente.');
+                        console.log('Se ha logueado correctamente.',this.token);
                         // redirigir al perfil
                         router.push({path: '/perfil'})
                     }
@@ -68,8 +68,9 @@ export const useUserStore = defineStore( 'user', {
             };
             await axios.get('http://localhost:8000/api/v1/user', config)
                 .then(data => {
+                    console.log(data, data.data)
                     if (data.statusText === "OK") {
-                        //this.userData = data.data
+                        this.userData = data.data
                     }
                 })
                 .catch(error => {
@@ -82,11 +83,11 @@ export const useUserStore = defineStore( 'user', {
             };
             axios.get('http://localhost:8000/api/v1/logout', config)
                 .then(data => {
+                    console.log(data.statusText)
                     if (data.statusText === "OK") {
                         this.token = null;
                         // borra el token del localstorage
-                        // localStorage.removeItem('token');
-
+                        localStorage.removeItem('token');
                         // redirige al inicio
                         router.push({path: '/'})
                     }
