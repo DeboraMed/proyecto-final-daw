@@ -1,17 +1,23 @@
 <script>
-
+import {useAlertStore} from "./stores/AlertStore.js";
+import Alert from "./shared/Alert.vue";
 import Navbar from "./shared/Navbar.vue";
 
 export default {
-  nombre: "App",
-  components: {Navbar}
+  name: "App",
+  components: {Navbar,Alert},
+  setup() {
+    const alertStore = useAlertStore();
+    return {alertStore};
+  }
 }
 </script>
 
 <template>
   <Navbar/>
   <main class="container">
-  <router-view/>
+    <router-view/>
+    <alert></alert>
   </main>
 </template>
 

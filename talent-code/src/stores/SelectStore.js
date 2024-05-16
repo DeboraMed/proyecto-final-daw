@@ -14,7 +14,7 @@ export const useSelectStore = defineStore( 'select', {
     actions: {
         async fetchSelectContractOptions() {
             if (!this.contractSelectData) {
-                await axios.get('http://localhost:8000/api/v1/contract-type')
+                await axios.get('/api/v1/contract-type')
                     .then(response => {
                         this.contractSelectData = Object.entries(response.data).map(([value, label]) => ({
                             value,
@@ -29,7 +29,7 @@ export const useSelectStore = defineStore( 'select', {
         },
         async fetchSelectScheduleOptions() {
             if (!this.scheduleSelectData) {
-                await axios.get('http://localhost:8000/api/v1/schedule')
+                await axios.get('/api/v1/schedule')
                     .then(response => {
                         this.scheduleSelectData = Object.entries(response.data).map(([value, label]) => ({
                             value,
@@ -44,7 +44,7 @@ export const useSelectStore = defineStore( 'select', {
         },
         async fetchSelectSpecializationOptions() {
             if (!this.specializationSelectData) {
-                await axios.get('http://localhost:8000/api/v1/specialization')
+                await axios.get('/api/v1/specialization')
                     .then(response => {
                         this.specializationSelectData = Object.entries(response.data).map(([value, label]) => ({
                             value,
@@ -59,7 +59,7 @@ export const useSelectStore = defineStore( 'select', {
         },
         async fetchSelectWorkOptions() {
             if (!this.workSelectData) {
-                await axios.get('http://localhost:8000/api/v1/work-mode')
+                await axios.get('/api/v1/work-mode')
                     .then(response => {
                         this.workSelectData = Object.entries(response.data).map(([value, label]) => ({value, label}));
                         localStorage.setItem('workSelectData', JSON.stringify(this.workSelectData));
@@ -71,7 +71,7 @@ export const useSelectStore = defineStore( 'select', {
         },
         async fetchSelectAcademicOptions() {
             if (!this.academicSelectData) {
-                await axios.get('http://localhost:8000/api/v1/academic-level')
+                await axios.get('/api/v1/academic-level')
                     .then(response => {
                         this.academicSelectData = Object.entries(response.data).map(([value, label]) => ({
                             value,
@@ -86,7 +86,7 @@ export const useSelectStore = defineStore( 'select', {
         },
         async fetchSelectExperienceOptions() {
             if (!this.experienceSelectData) {
-                await axios.get('http://localhost:8000/api/v1/experience-level')
+                await axios.get('/api/v1/experience-level')
                     .then(response => {
                         this.experienceSelectData = Object.entries(response.data).map(([value, label]) => ({
                             value,
@@ -101,7 +101,7 @@ export const useSelectStore = defineStore( 'select', {
         },
         async fetchSelectTechnologyOptions() {
             if (!this.technologySelectData) {
-                await axios.get('http://localhost:8000/api/v1/technology-type')
+                await axios.get('/api/v1/technology-type')
                     .then(response => {
                         this.technologySelectData = Object.entries(response.data).map(([value, label]) => ({
                             value,

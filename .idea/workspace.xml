@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: formulario de perfil">
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="fix: fix de estilos y estiquetas">
+      <change afterPath="$PROJECT_DIR$/talent-code/src/shared/Alert.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/talent-code/src/stores/AlertStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Inspiracion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Inspiracion.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Recluta.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Recluta.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/stores/SelectStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/SelectStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" afterDir="false" />
     </list>
@@ -32,6 +32,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "DeboraMed"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="fe5eafe4-d0c3-45d3-8b1a-99b6c8fa4fe0" />
+        <option name="url" value="https://github.com/DeboraMed/proyecto-final-daw.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -85,7 +99,8 @@
       <workItem from="1713377229137" duration="20090000" />
       <workItem from="1714066699646" duration="4763000" />
       <workItem from="1714835015677" duration="20901000" />
-      <workItem from="1715587524391" duration="44454000" />
+      <workItem from="1715587524391" duration="45128000" />
+      <workItem from="1715851666607" duration="6983000" />
     </task>
     <task id="LOCAL-00001" summary="Actualizando el README">
       <option name="closed" value="true" />
@@ -119,7 +134,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715790410786</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix: fix de estilos y estiquetas">
+      <option name="closed" value="true" />
+      <created>1715795470577</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715795470577</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix: fix de estilos y estiquetas">
+      <option name="closed" value="true" />
+      <created>1715795476925</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715795476925</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +172,7 @@
     <MESSAGE value="feat: formularios y UserStore" />
     <MESSAGE value="feat: select de formularios y selectStore" />
     <MESSAGE value="feat: formulario de perfil" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: formulario de perfil" />
+    <MESSAGE value="fix: fix de estilos y estiquetas" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fix de estilos y estiquetas" />
   </component>
 </project>

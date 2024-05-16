@@ -153,7 +153,7 @@ export default {
                  id="github"
                  v-model="developer.github_url"
                  placeholder="Github URL"/>
-          <button type="submit" class="form__button">Registrarse</button>
+          <button type="submit" class="form__button">Añadir preferencias</button>
         </form>
 
       </div>

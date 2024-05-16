@@ -30,15 +30,14 @@ export default {
       return re.test(email);
     },
     async submitForm() {
-      //this.validateForm('email');
+      this.validateForm('email');
       //this.validateForm('password');
 
       // aqui llamar el UserStore
       this.userStore.login(this.email, this.password)
+
     },
-
   }
-
 
 }
 

@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import axios from "axios";
 import router from "../router/router.js"
+import {useAlertStore} from "./AlertStore.js";
 
 export const useUserStore = defineStore( 'user', {
     state:() => ({
@@ -12,6 +13,7 @@ export const useUserStore = defineStore( 'user', {
             return this.token !== null
         },
         register(developer){
+            const alertStore = useAlertStore();
             let json = {
                 'name': developer.name,
                 'email':developer.email,
@@ -27,10 +29,11 @@ export const useUserStore = defineStore( 'user', {
                 'specialization': developer.specialization,
                 'github_url':developer.github_url,*/
             };
-            axios.post('http://localhost:8000/api/v1/register',json)
+            axios.post('/api/v1/register',json)
                 .then(data => {
                     if (data.statusText === "OK") {
                         console.log('Se ha registrado correctamente');
+                        alertStore.success('Se ha registrado correctamente.');
                         // redirige al login
                         router.push(({path: '/login'}))
                     }
@@ -41,11 +44,12 @@ export const useUserStore = defineStore( 'user', {
 
         },
         login(email,password) {
+            const alertStore = useAlertStore();
             let json = {
                 'email': email,
                 'password': password,
             };
-            axios.post('http://localhost:8000/api/v1/login', json)
+            axios.post('/api/v1/login', json)
                 .then(data => {
                     console.log(json)
                     if (data.statusText === "OK") {
@@ -53,6 +57,7 @@ export const useUserStore = defineStore( 'user', {
                         this.token = data.data.token;
                         // guarda el token en el localstorage
                         localStorage.setItem('token', this.token);
+                        alertStore.success('Se ha registrado correctamente.');
                         console.log('Se ha logueado correctamente.',this.token);
                         // redirigir al perfil
                         router.push({path: '/perfil'})
@@ -60,31 +65,37 @@ export const useUserStore = defineStore( 'user', {
                 })
                 .catch(error => {
                     console.error('Error en la solicitud:', error);
+                    alertStore.error('Usuario o contraseña incorrectos.');
                 });
         },
         async fetchUser() {
+            const alertStore = useAlertStore();
             const config = {
                 headers: {Authorization: `Bearer ${this.token}`}
             };
-            await axios.get('http://localhost:8000/api/v1/user', config)
+            await axios.get('/api/v1/user', config)
                 .then(data => {
                     console.log(data, data.data)
                     if (data.statusText === "OK") {
                         this.userData = data.data.user
+                        alertStore.success('Solicitud procesada correctamente.');
                     }
                 })
                 .catch(error => {
                     console.error('Error en la solicitud:', error);
+                    alertStore.error('Error en la solicitud.');
                 });
         },
         logout() {
+            const alertStore = useAlertStore();
             const config = {
                 headers: {Authorization: `Bearer ${this.token}`}
             };
-            axios.get('http://localhost:8000/api/v1/logout', config)
+            axios.get('/api/v1/logout', config)
                 .then(data => {
                     console.log(data.statusText)
                     if (data.statusText === "OK") {
+                        alertStore.success('Ha cerrado sesión correctamente.');
                         this.token = null;
                         // borra el token del localstorage
                         localStorage.removeItem('token');
@@ -94,9 +105,8 @@ export const useUserStore = defineStore( 'user', {
                 })
                 .catch(error => {
                     console.error('Error en la solicitud:', error);
+                    alertStore.error('Error en la solicitud.');
                 });
         },
-
-
     }
 })
