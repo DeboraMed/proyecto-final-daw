@@ -10,6 +10,7 @@ export const useSelectStore = defineStore( 'select', {
         academicSelectData: JSON.parse(localStorage.getItem('academicSelectData')),
         experienceSelectData: JSON.parse(localStorage.getItem('experienceSelectData')),
         technologySelectData: JSON.parse(localStorage.getItem('technologySelectData')),
+        technologiesSelectData: JSON.parse(localStorage.getItem('technologiesSelectData'))
     }),
     actions: {
         async fetchSelectContractOptions() {
@@ -108,6 +109,21 @@ export const useSelectStore = defineStore( 'select', {
                             label
                         }));
                         localStorage.setItem('technologySelectData', JSON.stringify(this.technologySelectData));
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener las opciones:', error);
+                    });
+            }
+        },
+        async fetchSelectTechnologiesOptions() {
+            if (!this.technologiesSelectData) {
+                await axios.get('/api/v1/technologies')
+                    .then(response => {
+                        this.technologiesSelectData = Object.entries(response.data).map(([value, label]) => ({
+                            value,
+                            label
+                        }));
+                        localStorage.setItem('technologiesSelectData', JSON.stringify(this.technologiesSelectData));
                     })
                     .catch(error => {
                         console.error('Error al obtener las opciones:', error);

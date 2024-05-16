@@ -34,7 +34,7 @@ export default {
         address: '',
         avatar: '',
       },
-      userType: 'desarrollador', // 'desarrollador' o 'empresa'
+      userType: '', // 'desarrollador' o 'empresa'
     }
   },
   methods: {
@@ -57,6 +57,7 @@ export default {
     },
     registerCompany() {
       // Lógica de registro para empresas
+      this.userStore.register(this.company);
     },
     previewFiles(event) {
       //TODO: implementar logica de file para avatar
@@ -69,6 +70,28 @@ export default {
 <template>
   <main>
     <section class="container__form">
+      <!-- Seleccion desarrollador o empresa -->
+      <div> <p>¿Eres un desarrollador o una empresa?</p>
+        <fieldset>
+          <legend>Elije una opción</legend>
+          <div>
+            <input type="radio"
+                   id="desarrollador"
+                   value="desarrollador"
+                   v-model="userType"
+                   checked />
+            <label for="desarrollador">Desarrollador</label>
+          </div>
+          <div>
+            <input type="radio"
+                   id="empresa"
+                   value="empresa"
+                   v-model="userType"/>
+            <label for="empresa">Empresa</label>
+          </div>
+          <button></button>
+        </fieldset>
+      </div>
 
       <!-- Formulario de registro para trabajadores -->
       <div v-if="userType === 'desarrollador'">

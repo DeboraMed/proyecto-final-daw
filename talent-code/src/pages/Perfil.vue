@@ -13,7 +13,6 @@ export default {
       userStore,
     }
   },
-
   data() {
     return {
       perfilPendiente: true,
@@ -24,6 +23,7 @@ export default {
       selectAcademicOptions: [],
       selectExperienceOptions: [],
       selectTechnologyOptions: [],
+      selectTechnologiesOptions: [],
       userData: null,
       developer: {
         contract_type: '',
@@ -33,6 +33,7 @@ export default {
         academic_level: '',
         experience_level: '',
         technology_type: '',
+        technologies: '',
         github_url: '',
       },
     }
@@ -59,6 +60,10 @@ export default {
     // tipos de tecnologias
     await this.selectStore.fetchSelectTechnologyOptions();
     this.selectTechnologyOptions = this.selectStore.technologySelectData;
+    // listado de tecnologias
+    await this.selectStore.fetchSelectTechnologiesOptions();
+    this.selectTechnologiesOptions = this.selectStore.technologiesSelectData;
+
     await this.userStore.fetchUser();
     this.userData = this.userStore.userData;
   },
@@ -74,7 +79,6 @@ export default {
 <template>
   <main>
     <section class="container__form">
-      <div>Perfil de usuario</div>
       <article v-if="userData">
         <h2>Bienvenid@ <span>{{ userData.name }}</span></h2>
         Hola, {{ userData.name }} Bienvenido a Talent.Code<br>
@@ -141,12 +145,23 @@ export default {
             </option>
           </select>
           <select class="home__select" v-model="developer.technology_type">
-            <option class="home__select__option" disabled value="">Selecciona una tecnología</option>
+            <option class="home__select__option" disabled value="">Selecciona un tipo de tecnología</option>
             <option class="home__select__option"
-                    id="tecnologias"
+                    id="tipo-tecnologias"
                     v-for="option in selectTechnologyOptions"
                     :key="option.value"
                     :value="option.value">{{ option.label }}
+            </option>
+          </select>
+          <select class="home__select"
+                  v-model="developer.technologies"
+                  :disabled="!developer.technology_type">
+            <option class="home__select__option" disabled value="">Selecciona una tecnología</option>
+            <option class="home__select__option"
+                    id="tecnologias"
+                    v-for="option in selectTechnologiesOptions"
+                    :key="option.label.value"
+                    :value="option.label.value">{{ option.label.value.name }}
             </option>
           </select>
           <input type="url"

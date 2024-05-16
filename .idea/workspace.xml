@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="fix: fix de estilos y estiquetas">
-      <change afterPath="$PROJECT_DIR$/talent-code/src/shared/Alert.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/talent-code/src/stores/AlertStore.js" afterDir="false" />
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: componente alert">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/stores/SelectStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/SelectStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +93,7 @@
       <workItem from="1714066699646" duration="4763000" />
       <workItem from="1714835015677" duration="20901000" />
       <workItem from="1715587524391" duration="45128000" />
-      <workItem from="1715851666607" duration="6983000" />
+      <workItem from="1715851666607" duration="12475000" />
     </task>
     <task id="LOCAL-00001" summary="Actualizando el README">
       <option name="closed" value="true" />
@@ -150,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715795476925</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: componente alert">
+      <option name="closed" value="true" />
+      <created>1715874529662</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715874529662</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +174,7 @@
     <MESSAGE value="feat: select de formularios y selectStore" />
     <MESSAGE value="feat: formulario de perfil" />
     <MESSAGE value="fix: fix de estilos y estiquetas" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: fix de estilos y estiquetas" />
+    <MESSAGE value="feat: componente alert" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: componente alert" />
   </component>
 </project>
