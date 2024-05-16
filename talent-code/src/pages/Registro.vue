@@ -14,21 +14,11 @@ export default {
   data() {
     /*tipo desarrollador y empresa*/
     return {
-      developer: {
+      user: {
         name: '',
         email: '',
         password: '',
-        user_type: 'desarrollador',
-        description: '',
-        phone: '',
-        address: '',
-        avatar: '',
-      },
-      company: {
-        name: '',
-        email: '',
-        password: '',
-        user_type: 'empresa',
+        user_type: '',
         description: '',
         phone: '',
         address: '',
@@ -47,12 +37,12 @@ export default {
           'description', 'phone', 'address', 'avatar');
 
       // aqui llamar el UserStore
-      this.userStore.register(this.developer);
+      this.userStore.register(this.user);
 
     },
-    registerDeveloper() {
-      // Lógica de registro para developers
-      this.userStore.register(this.developer);
+    registeruser() {
+      // Lógica de registro para users
+      this.userStore.register(this.user);
 
     },
     registerCompany() {
@@ -70,146 +60,85 @@ export default {
 <template>
   <main>
     <section class="container__form">
-      <!-- Seleccion desarrollador o empresa -->
-      <div> <p>¿Eres un desarrollador o una empresa?</p>
-        <fieldset>
-          <legend>Elije una opción</legend>
-          <div>
-            <input type="radio"
-                   id="desarrollador"
-                   value="desarrollador"
-                   v-model="userType"
-                   checked />
-            <label for="desarrollador">Desarrollador</label>
-          </div>
-          <div>
-            <input type="radio"
-                   id="empresa"
-                   value="empresa"
-                   v-model="userType"/>
-            <label for="empresa">Empresa</label>
-          </div>
-          <button></button>
-        </fieldset>
-      </div>
-
       <!-- Formulario de registro para trabajadores -->
-      <div v-if="userType === 'desarrollador'">
-        <h2>Formulario de registro de desarrollador</h2>
-        <form class="form" @submit.prevent="registerDeveloper">
+      <div >
+        <h2>Formulario de registro </h2>
+        <form class="form" @submit.prevent="registeruser">
           <fieldset>
             <label for="nombre">Nombre</label>
             <input type="text"
                    id="nombre"
-                   v-model="developer.name"
+                   v-model="user.name"
                    placeholder="Nombre"/>
           </fieldset>
           <fieldset>
             <label for="email">Email</label>
             <input type="email"
                    id="email"
-                   v-model="developer.email"
+                   v-model="user.email"
                    placeholder="Correo electrónico"/>
           </fieldset>
           <fieldset>
             <label for="password">Contraseña</label>
             <input type="password"
                    id="password"
-                   v-model="developer.password"
+                   v-model="user.password"
                    placeholder="Contraseña"/>
           </fieldset>
           <fieldset>
             <label for="descripcion">Descripción</label>
             <input type="text"
                    id="descripcion"
-                   v-model="developer.description"
+                   v-model="user.description"
                    placeholder="Escribe una pequeña descripción..."/>
           </fieldset>
           <fieldset>
             <label for="telefono">Teléfono</label>
             <input type="text"
                    id="telefono"
-                   v-model="developer.phone"
+                   v-model="user.phone"
                    placeholder="Teléfono"/>
           </fieldset>
           <fieldset>
             <label for="direccion">Direccion</label>
             <input type="text"
                    id="direccion"
-                   v-model="developer.address"
+                   v-model="user.address"
                    placeholder="Dirección"/>
           </fieldset>
           <fieldset>
             <label for="avatar">Avatar</label>
             <input type="url"
                    id="avatar"
-                   v-model="developer.avatar"
+                   v-model="user.avatar"
                    placeholder="Avatar"/>
           </fieldset>
           <!-- <input type="file"
                       @change="previewFiles"
                       placeholder="Avatar"/>-->
-          <button type="submit" class="form__button">Registrarse</button>
-        </form>
-      </div>
 
-      <!-- Formulario de registro para empresas -->
-      <div v-if="userType === 'empresa'">
-        <h2>Formulario de registro de Empresa</h2>
-        <form class="form" @submit.prevent="registerCompany">
-          <!-- Pestaña de información básica -->
-          <fieldset>
-            <label for="nombre">Nombre</label>
-            <input type="text"
-                   id="nombre"
-                   v-model="company.name"
-                   placeholder="Nombre de la empresa"/>
-          </fieldset>
-          <fieldset>
-            <label for="email">Email</label>
-            <input type="email"
-                   id="email"
-                   v-model="company.email"
-                   placeholder="Correo electrónico"/>
-          </fieldset>
-          <fieldset>
-            <label for="contraseña">Contraseña</label>
-            <input type="password"
-                   id="contraseña"
-                   v-model="company.password"
-                   placeholder="Contraseña"/>
-          </fieldset>
-          <fieldset>
-            <label for="descripcion">Descripcion</label>
-            <input type="text"
-                   id="descripcion"
-                   v-model="company.description"
-                   placeholder="Descripción de la empresa..."/>
-          </fieldset>
-          <fieldset>
-            <label for="telefono">Teléfono</label>
-            <input type="number"
-                   id="telefono"
-                   v-model="company.phone"
-                   placeholder="Teléfono"/>
-          </fieldset>
-          <fieldset>
-            <label for="direccion">Dirección</label>
-            <input type="text"
-                   id="direccion"
-                   v-model="company.address"
-                   placeholder="Dirección"/>
-          </fieldset>
-          <fieldset>
-            <label for="avatar">Avatar</label>
-            <input type="url"
-                   id="avatar"
-                   v-model="company.avatar"
-                   placeholder="Avatar"/>
-          </fieldset>
-          <!-- <input type="file"
-                      @change="previewFiles"
-                      placeholder="Avatar"/>-->
+          <!-- Seleccion desarrollador o empresa -->
+          <div> <p>¿Eres un desarrollador o una empresa?</p>
+            <fieldset>
+              <legend>Elije una opción</legend>
+              <div>
+                <input type="radio"
+                       id="desarrollador"
+                       value="desarrollador"
+                       v-model="user.user_type"
+                       checked />
+                <label for="desarrollador">Desarrollador</label>
+              </div>
+              <div>
+                <input type="radio"
+                       id="empresa"
+                       value="empresa"
+                       v-model="user.user_type"/>
+                <label for="empresa">Empresa</label>
+              </div>
+            </fieldset>
+          </div>
+
           <button type="submit" class="form__button">Registrarse</button>
         </form>
       </div>
