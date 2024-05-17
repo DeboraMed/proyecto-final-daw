@@ -49,7 +49,7 @@ export default {
         this.errors.avatar = 'El avatar es requerido.';
       } else if (!/^https?:\/\/.*/.test(this.user.avatar)) {
         this.errors.avatar = 'El avatar debe ser una URL válida.';
-      } if (!this.user.user_type) {
+      } else if (!this.user.user_type) {
         this.errors.user_type = 'Por favor, selecciona si eres un desarrollador o una empresa.';
       }
       if (Object.keys(this.errors).length === 0) {
@@ -174,12 +174,4 @@ export default {
 </template>
 
 <style scoped>
-.error {
-  color: var(--font-color-p-error);
-  font-size: medium;
-}
-
-.container__form {
-  margin-top: 5rem;
-}
 </style>

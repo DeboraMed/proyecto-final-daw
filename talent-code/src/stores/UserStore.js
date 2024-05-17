@@ -34,8 +34,9 @@ export const useUserStore = defineStore( 'user', {
                     if (data.statusText === "Created") {
                         console.log('Se ha registrado correctamente');
                         alertStore.success('Se ha registrado correctamente.');
-                        // redirige al login
-                        router.push(({path: '/login'}))
+
+                        // loguea directamente al usuario
+                        this.login(user.email,user.password)
                     }
                 })
                 .catch(error => {

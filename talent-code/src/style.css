@@ -57,6 +57,10 @@ body {
   box-sizing: border-box; /* Incluye el padding y el borde en el ancho del elemento */
 }
 
+.container__form {
+  margin-top: 5rem;
+}
+
 .main__content {
   display: inline-flex;
   width: 100%;
@@ -120,6 +124,11 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.error {
+  color: var(--font-color-p-error);
+  font-size: medium;
 }
 
 .form__button {

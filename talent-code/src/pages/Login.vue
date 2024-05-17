@@ -12,33 +12,26 @@ export default {
     return {
       email: '',
       password: '',
+      errors: {},
+      isFormValid: false
     }
   },
   methods: {
     validateForm(field) {
-      if (!this.password || this.password.length < 3) {
-        //this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
+      if (!this.email || !/\w+@\w+\.+[a-z]/.test(this.email)) {
+        this.errors.email = 'Introduce un correo electrónico válido.';
+      } else if (!this.password || this.password.length < 3) {
+        this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
       }
-      if (!this.email || !this.validateEmail(this.email)) {
-        //this.errors.email = 'Introduce un correo electrónico válido.';
-      } else {
-        //this.errors[field] = '';
+      if (Object.keys(this.errors).length === 0) {
+        this.submitForm();
       }
-    },
-    validateEmail(email) {
-      let re = /\w+@\w+\.+[a-z]/;
-      return re.test(email);
     },
     async submitForm() {
-      this.validateForm('email');
-      //this.validateForm('password');
-
-      // aqui llamar el UserStore
-      this.userStore.login(this.email, this.password)
-
+      this.isFormValid = true
+      this.userStore.login(this.email,this.password);
     },
   }
-
 }
 
 </script>
@@ -46,7 +39,7 @@ export default {
 <template>
   <main>
     <section class="container__form">
-      <form class="form" @submit.prevent="submitForm">
+      <form class="form" @submit.prevent="validateForm">
         <h2>
           Inicio de sesión en Talent.Code
         </h2>
@@ -57,9 +50,8 @@ export default {
             id="email"
             placeholder="email@ejemplo.com"
             v-model="email"
-            type="text"
-            @change="validateForm('email')"
-            >
+            type="text"/>
+          <p class="error" v-if="errors.email">{{ errors.email }}</p>
         </fieldset>
         <fieldset>
           <label for="password">Contraseña</label>
@@ -67,9 +59,8 @@ export default {
             id="password"
             placeholder="Contraseña"
             v-model="password"
-            type="password"
-            @change="validateForm('password')"
-          >
+            type="password"/>
+          <p class="error" v-if="errors.password">{{ errors.password }}</p>
         </fieldset>
         <button class="form__button" type="submit">Enviar</button>
       </form>
@@ -79,8 +70,4 @@ export default {
 </template>
 
 <style scoped>
-.container__form{
-  margin-top: 5rem;
-}
-
 </style>

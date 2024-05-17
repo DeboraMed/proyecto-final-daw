@@ -1,7 +1,9 @@
 <script setup>
 import {useThemeStore} from '../stores/ThemeStore';
+import {useUserStore} from "../stores/UserStore.js";
 
 const themeStore = useThemeStore();
+const userStore = useUserStore();
 </script>
 
 <script>
@@ -38,8 +40,6 @@ export default {
 <section>
 <!--  TODO: mostrar opciones segun logueado y segun tipo de usuario-->
   <nav class="nav">
-    <!--logotipo-->
-
     <!-- Menu normal-->
     <div v-if="!windowSmall" class="navbar__content">
       <router-link to="/">
@@ -49,21 +49,21 @@ export default {
       <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
       <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
       <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
-      <router-link class="nav__router__pri" to="/recluta">Recluta</router-link>
+      <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/recluta">Recluta</router-link>
       <div class="nav__router__pri__button">
-        <router-link to="/login">
-          <button >Inicia Sesión</button>
+        <router-link v-show="!userStore.isLogged()" to="/login">
+          <button class="navbar__button">Inicia Sesión</button>
         </router-link>
-        <router-link to="/registro">
-          <button>Regístrate</button>
+        <router-link v-show="!userStore.isLogged()" to="/registro">
+          <button class="navbar__button">Regístrate</button>
         </router-link>
 
       </div>
       <!-- Parte de usuario logueado -->
       <div class="navbar__content">
-        <router-link class="nav__router__pri" to="/portfolio">Portfolio</router-link>
-        <router-link class="nav__router__pri" to="/perfil">Perfil</router-link>
-        <router-link class="nav__router__pri" to="/">Salir</router-link>
+        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/portfolio">Portfolio</router-link>
+        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
+        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/">Salir</router-link>
       </div>
       <dark-mode/>
     </div>
@@ -150,6 +150,10 @@ export default {
   align-items: center;
 
 }
+.navbar__button{
+  margin-right: 1rem;
+}
+
 img {
   height: 4rem;
   /*margin-left: 1rem;*/

@@ -64,6 +64,7 @@ export default {
     await this.selectStore.fetchSelectTechnologiesOptions();
     this.selectTechnologiesOptions = this.selectStore.technologiesSelectData;
 
+    // trae al usuario con sus datos
     await this.userStore.fetchUser();
     this.userData = this.userStore.userData;
   },
