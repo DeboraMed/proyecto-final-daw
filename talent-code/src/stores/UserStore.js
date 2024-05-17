@@ -12,17 +12,17 @@ export const useUserStore = defineStore( 'user', {
         isLogged(){
             return this.token !== null
         },
-        register(developer){
+        register(user){
             const alertStore = useAlertStore();
             let json = {
-                'name': developer.name,
-                'email':developer.email,
-                'password': developer.password,
-                'user_type': developer.user_type,
-                'description': developer.description,
-                'phone': developer.phone,
-                'address': developer.address,
-                'avatar': developer.avatar,
+                'name': user.name,
+                'email':user.email,
+                'password': user.password,
+                'user_type': user.user_type,
+                'description': user.description,
+                'phone': user.phone,
+                'address': user.address,
+                'avatar': user.avatar,
                 /*'contract_type': developer.contract_type,
                 'work_mode': developer.work_mode,
                 'schedule':developer.schedule,
@@ -31,7 +31,7 @@ export const useUserStore = defineStore( 'user', {
             };
             axios.post('/api/v1/register',json)
                 .then(data => {
-                    if (data.statusText === "OK") {
+                    if (data.statusText === "Created") {
                         console.log('Se ha registrado correctamente');
                         alertStore.success('Se ha registrado correctamente.');
                         // redirige al login
@@ -40,8 +40,8 @@ export const useUserStore = defineStore( 'user', {
                 })
                 .catch(error => {
                     console.error('Error en la solicitud: ', error);
+                    alertStore.error('Error en la solicitud: Email ya registrado.');
                 });
-
         },
         login(email,password) {
             const alertStore = useAlertStore();
@@ -51,13 +51,14 @@ export const useUserStore = defineStore( 'user', {
             };
             axios.post('/api/v1/login', json)
                 .then(data => {
+                    console.log(data.statusText)
                     console.log(json)
                     if (data.statusText === "OK") {
                         // saca el token de la llamada??
                         this.token = data.data.token;
                         // guarda el token en el localstorage
                         localStorage.setItem('token', this.token);
-                        alertStore.success('Se ha registrado correctamente.');
+                        alertStore.success('Se ha logueado correctamente.');
                         console.log('Se ha logueado correctamente.',this.token);
                         // redirigir al perfil
                         router.push({path: '/perfil'})

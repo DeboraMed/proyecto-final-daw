@@ -72,6 +72,7 @@ export default {
       // registro de los campos extra
       this.userStore.register(this.developer);
     }
+    // TODO: manejar el estado de campos de perfil pendiente
   },
 }
 </script>
@@ -90,6 +91,7 @@ export default {
       <div v-if="perfilPendiente">
         <h2>Formulario de preferencias laborales</h2>
         <form class="form" @submit.prevent="additionalProfileFields">
+          <legend> Selecciona tus preferencias Laborales</legend>
           <select class="home__select" v-model="developer.contract_type">
             <option class="home__select__option" disabled value="">Selecciona un tipo de contrato</option>
             <option class="home__select__option"
@@ -126,6 +128,9 @@ export default {
                     :value="option.value">{{ option.label }}
             </option>
           </select>
+          <h2>Formulario de preferencias personales</h2>
+          <legend> Selecciona tus preferencias personales</legend>
+          <p>Nivel académico (campo que estara el formulario de Formacion)</p>
           <select class="home__select" v-model="developer.academic_level">
             <option class="home__select__option" disabled value="">Selecciona un nivel académico</option>
             <option class="home__select__option"
@@ -135,6 +140,7 @@ export default {
                     :value="option.value">{{ option.label }}
             </option>
           </select>
+          <p>Experiencia Laboral (campo que estara el formulario de Experiencia Laboral)</p>
           <select class="home__select" v-model="developer.experience_level">
             <option class="home__select__option" disabled value="">Selecciona un nivel de experiencia</option>
             <option class="home__select__option"
@@ -144,6 +150,7 @@ export default {
                     :value="option.value">{{ option.label }}
             </option>
           </select>
+          <p>Tecnologias (campo que estara el formulario de Proyectos)</p>
           <select class="home__select" v-model="developer.technology_type">
             <option class="home__select__option" disabled value="">Selecciona un tipo de tecnología</option>
             <option class="home__select__option"
@@ -160,8 +167,8 @@ export default {
             <option class="home__select__option"
                     id="tecnologias"
                     v-for="option in selectTechnologiesOptions"
-                    :key="option.label.value"
-                    :value="option.label.value">{{ option.label.value.name }}
+                    :key="option.value"
+                    :value="option.value">{{ option.label }}
             </option>
           </select>
           <input type="url"
@@ -197,20 +204,4 @@ export default {
   margin-top: 5rem;
 }
 
-.form__button {
-  background-color: black;
-  border-radius: 99999px;
-  color: #FFF8E8;
-  /* margin-top: 20px;*/
-  width: 100%;
-  height: 56px;
-  padding: 24px;
-  font-size: 14px;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
-}
-
-.form__button:hover {
-  background-color: #808080;
-  /*color: #000000;*/
-}
 </style>

@@ -50,10 +50,8 @@ export default {
         <h2>
           Inicio de sesión en Talent.Code
         </h2>
-        <div>
-          <p> Inicia sesión en la aplicación </p>
-        </div>
         <fieldset>
+          <legend> Inicia sesión en la aplicación </legend>
           <label for="Email">Email</label>
           <input
             id="email"
@@ -83,22 +81,6 @@ export default {
 <style scoped>
 .container__form{
   margin-top: 5rem;
-}
-
-.form__button{
-  background-color: black;
-  border-radius: 99999px;
-  color: #FFF8E8;
- /* margin-top: 20px;*/
-  width: 100%;
-  height: 56px;
-  padding: 24px;
-  font-size: 14px;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
-}
-.form__button:hover{
-  background-color: #808080;
-  /*color: #000000;*/
 }
 
 </style>
