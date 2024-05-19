@@ -38,7 +38,7 @@ export default {
 
 <template>
 <section>
-<!--  TODO: mostrar opciones segun logueado y segun tipo de usuario-->
+<!--  TODO: mostrar opciones segun tipo de usuario company o developer-->
   <nav class="nav">
     <!-- Menu normal-->
     <div v-if="!windowSmall" class="navbar__content">
@@ -49,7 +49,7 @@ export default {
       <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
       <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
       <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
-      <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/recluta">Recluta</router-link>
+      <router-link v-show="userStore.isLogged() && userStore.userType() ==='company'" class="nav__router__pri" to="/recluta">Recluta</router-link>
       <div class="nav__router__pri__button">
         <router-link v-show="!userStore.isLogged()" to="/login">
           <button class="navbar__button">Inicia Sesión</button>
@@ -61,7 +61,7 @@ export default {
       </div>
       <!-- Parte de usuario logueado -->
       <div class="navbar__content">
-        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/portfolio">Portfolio</router-link>
+        <router-link v-show="userStore.isLogged() && userStore.userType() ==='developer'" class="nav__router__pri" to="/portfolio">Portfolio</router-link>
         <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
         <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/">Salir</router-link>
       </div>

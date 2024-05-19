@@ -60,11 +60,6 @@ export default {
         this.isFormValid = true
         this.userStore.register(this.user);
     },
-    /*async registerUser() {
-      if (this.validateForm()){
-        this.userStore.register(this.user);
-      }
-    },*/
     previewFiles(event) {
       //TODO: implementar logica de file para avatar
       console.log(event.target.files);

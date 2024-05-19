@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: validaciones y estilos de fomulerios">
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: gestion del login y diseño del portfolio">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/404.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +95,7 @@
       <workItem from="1714066699646" duration="4763000" />
       <workItem from="1714835015677" duration="20901000" />
       <workItem from="1715587524391" duration="45128000" />
-      <workItem from="1715851666607" duration="32782000" />
+      <workItem from="1715851666607" duration="44198000" />
     </task>
     <task id="LOCAL-00001" summary="Actualizando el README">
       <option name="closed" value="true" />
@@ -180,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715944429659</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: gestion del login y diseño del portfolio">
+      <option name="closed" value="true" />
+      <created>1715966476648</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715966476648</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +212,7 @@
     <MESSAGE value="feat: select de listado tecnologias" />
     <MESSAGE value="fix: refactor de registro" />
     <MESSAGE value="feat: validaciones y estilos de fomulerios" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: validaciones y estilos de fomulerios" />
+    <MESSAGE value="feat: gestion del login y diseño del portfolio" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: gestion del login y diseño del portfolio" />
   </component>
 </project>

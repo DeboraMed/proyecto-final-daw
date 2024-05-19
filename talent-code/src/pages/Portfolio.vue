@@ -1,5 +1,5 @@
 <script setup>
-
+// TODO: traer los datos de la API
 </script>
 
 <template>
@@ -45,7 +45,6 @@
               </p>
             </div>
           </div>
-          <!-- Puedes agregar más proyectos de la misma manera -->
         </div>
       </div>
     </section>
