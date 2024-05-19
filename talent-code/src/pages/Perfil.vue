@@ -2,8 +2,11 @@
 
 import {useUserStore} from '../stores/UserStore.js';
 import {useSelectStore} from "../stores/SelectStore.js";
+import FormFormacion from "./forms/FormFormacion.vue";
+import FormExperiencia from "./forms/FormExperiencia.vue";
 
 export default {
+  components: {FormFormacion,FormExperiencia},
   setup() {
     const selectStore = useSelectStore();
     const userStore = useUserStore();
@@ -38,16 +41,16 @@ export default {
         technologies: '',
 
       },
-      /* Payload de edicion */
+      /* Payload de edicion TODO: manejar la edicion de la info base del perfil */
       user: {
-      /*  name: '',
-        email: '',
-        password: '',
-        user_type: '',
-        description: '',
-        phone: '',
-        address: '',
-        avatar: '',*/
+        /*  name: '',
+          email: '',
+          password: '',
+          user_type: '',
+          description: '',
+          phone: '',
+          address: '',
+          avatar: '',*/
         userable: {
           specialization: '',
           schedule: '',
@@ -111,7 +114,7 @@ export default {
       this.isFormValid = true
       this.userStore.editProfile(this.user);
     }
-    // TODO: queda el formulario de prferencias personales
+    // TODO: limpiar el codigo repetido
   },
 }
 </script>
@@ -125,11 +128,10 @@ export default {
         Tu email: {{ userData.email }}<br>
         <button class="button" @click="userStore.logout()">Cerrar sesión</button>
       </article>
-
-      <!--  TODO: enviar y validar los formularios -->
       <div v-if="perfilPendiente">
         <div class="tabs">
-          <!--          Primera tab-->
+
+          <!-- Primera tab-->
           <div class="tab-2">
             <label for="tab2-1">Formulario de preferencias laborales</label>
             <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
@@ -189,12 +191,13 @@ export default {
               </form>
             </div>
           </div>
-          <!--          Segunda tab-->
+
+          <!-- Segunda tab-->
           <div class="tab-2">
             <label for="tab2-2">Formulario de preferencias personales</label>
             <input id="tab2-2" name="tabs-two" type="radio">
             <div>
-              <form class="form__perfil" @submit.prevent="validateForm">
+<!--              <form class="form__perfil" @submit.prevent="validateForm">
                 <h2>Formulario de preferencias personales</h2>
                 <legend> Selecciona tus preferencias personales</legend>
                 <p>Nivel académico (campo que estara el formulario de Formacion)</p>
@@ -243,15 +246,14 @@ export default {
                        v-model="developer.github_url"
                        placeholder="Github URL"/>
                 <button type="submit" class="form__button">Añadir preferencias personales</button>
-              </form>
+              </form>-->
+              <form-formacion></form-formacion>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </section>
-
-
   </main>
 </template>
 

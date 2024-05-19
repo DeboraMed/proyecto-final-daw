@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: gestion del login y diseño del portfolio">
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat:gestion de pestañas para perfil y formulario de preferencias laborales">
+      <change afterPath="$PROJECT_DIR$/talent-code/src/pages/forms/FormExperiencia.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/talent-code/src/pages/forms/FormFormacion.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/talent-code/src/pages/forms/FormProyectos.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/components/HelloWorld.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Portfolio.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/stores/UserStore.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue Composition API Component" />
         <option value="JavaScript File" />
+        <option value="Vue Composition API Component" />
       </list>
     </option>
   </component>
@@ -95,7 +95,7 @@
       <workItem from="1714066699646" duration="4763000" />
       <workItem from="1714835015677" duration="20901000" />
       <workItem from="1715587524391" duration="45128000" />
-      <workItem from="1715851666607" duration="44198000" />
+      <workItem from="1715851666607" duration="46581000" />
     </task>
     <task id="LOCAL-00001" summary="Actualizando el README">
       <option name="closed" value="true" />
@@ -185,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715966476648</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat:gestion de pestañas para perfil y formulario de preferencias laborales">
+      <option name="closed" value="true" />
+      <created>1716149459092</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1716149459092</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +221,7 @@
     <MESSAGE value="fix: refactor de registro" />
     <MESSAGE value="feat: validaciones y estilos de fomulerios" />
     <MESSAGE value="feat: gestion del login y diseño del portfolio" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: gestion del login y diseño del portfolio" />
+    <MESSAGE value="feat:gestion de pestañas para perfil y formulario de preferencias laborales" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:gestion de pestañas para perfil y formulario de preferencias laborales" />
   </component>
 </project>
