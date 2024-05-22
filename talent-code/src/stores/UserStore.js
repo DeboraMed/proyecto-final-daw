@@ -50,21 +50,11 @@ export const useUserStore = defineStore('user', {
                 headers: {Authorization: `Bearer ${this.token}`}
             };
             let json = {
-                'name': user.name,
-                'email': user.email,
-                'password': user.password,
-                'user_type': user.user_type,
-                'description': user.description,
-                'phone': user.phone,
-                'address': user.address,
-                'avatar': user.avatar,
-                "userable": {
-                    'contract_type': user.contract_type,
-                    'work_mode': user.work_mode,
-                    'schedule': user.schedule,
-                    'specialization': user.specialization,
-                    'github_url': user.github_url,
-                },
+                "name": user.name,
+                "description": user.email,
+                "phone": user.phone,
+                "address": user.address,
+                "userable": user.userable,
             };
             axios.put('/api/v1/user', json, config)
                 .then(async data => {
@@ -132,12 +122,12 @@ export const useUserStore = defineStore('user', {
             const config = {
                 headers: {Authorization: `Bearer ${this.token}`}
             };
+            alertStore.success('Ha cerrado sesión correctamente.');
+            this.token = null;
             axios.get('/api/v1/logout', config)
                 .then(data => {
                     console.log(data.statusText)
                     if (data.statusText === "OK") {
-                        alertStore.success('Ha cerrado sesión correctamente.');
-                        this.token = null;
                         // borra el token del localstorage
                         localStorage.removeItem('token');
                         // redirige al inicio

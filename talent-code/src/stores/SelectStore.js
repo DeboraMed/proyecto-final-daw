@@ -130,5 +130,15 @@ export const useSelectStore = defineStore( 'select', {
                     });
             }
         },
+        async fetchAllSelectOptionsEnums() {
+            await this.fetchSelectContractOptions();
+            await this.fetchSelectScheduleOptions();
+            await this.fetchSelectSpecializationOptions();
+            await this.fetchSelectWorkOptions();
+            await this.fetchSelectAcademicOptions();
+            await this.fetchSelectExperienceOptions();
+            await this.fetchSelectTechnologyOptions();
+            await this.fetchSelectTechnologiesOptions();
+        },
     }
 })

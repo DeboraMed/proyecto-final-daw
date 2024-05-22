@@ -19,14 +19,6 @@ export default {
   data() {
     return {
       perfilPendiente: true,
-      selectContractOptions: [],
-      selectScheduleOptions: [],
-      selectSpecializationOptions: [],
-      selectWorkOptions: [],
-      selectAcademicOptions: [],
-      selectExperienceOptions: [],
-      selectTechnologyOptions: [],
-      selectTechnologiesOptions: [],
       userData: null,
       /* Info que carga en los select */
       developer: {
@@ -64,30 +56,8 @@ export default {
     }
   },
   async created() {
-    // tipos de contrato
-    await this.selectStore.fetchSelectContractOptions();
-    this.selectContractOptions = this.selectStore.contractSelectData;
-    // tipos de jornada laboral
-    await this.selectStore.fetchSelectScheduleOptions();
-    this.selectScheduleOptions = this.selectStore.scheduleSelectData;
-    // tipos de espacialidad
-    await this.selectStore.fetchSelectSpecializationOptions();
-    this.selectSpecializationOptions = this.selectStore.specializationSelectData;
-    // tipos de modo de trabajo
-    await this.selectStore.fetchSelectWorkOptions();
-    this.selectWorkOptions = this.selectStore.workSelectData;
-    // niveles academicos
-    await this.selectStore.fetchSelectAcademicOptions();
-    this.selectAcademicOptions = this.selectStore.academicSelectData;
-    // niveles de experiencia
-    await this.selectStore.fetchSelectExperienceOptions();
-    this.selectExperienceOptions = this.selectStore.experienceSelectData;
-    // tipos de tecnologias
-    await this.selectStore.fetchSelectTechnologyOptions();
-    this.selectTechnologyOptions = this.selectStore.technologySelectData;
-    // listado de tecnologias
-    await this.selectStore.fetchSelectTechnologiesOptions();
-    this.selectTechnologiesOptions = this.selectStore.technologiesSelectData;
+    // Refresca los valores para listas 'select'
+    await this.selectStore.fetchAllSelectOptionsEnums();
 
     // trae al usuario con sus datos
     await this.userStore.fetchUser();
@@ -97,13 +67,13 @@ export default {
     validateForm() {
       this.errors = {};
 
-      if (!this.user.userable.contract_type) {
+      if (!this.userData.userable.contract_type) {
         this.errors.contract_type = 'Por favor, selecciona un tipo de contrato.';
-      } else if (!this.user.userable.schedule) {
+      } else if (!this.userData.userable.schedule) {
         this.errors.schedule = 'Por favor, selecciona un tipo de jornada.';
-      } else if (!this.user.userable.specialization) {
+      } else if (!this.userData.userable.specialization) {
         this.errors.specialization = 'Por favor, selecciona una especialidad.';
-      } else if (!this.user.userable.work_mode) {
+      } else if (!this.userData.userable.work_mode) {
         this.errors.work_mode = 'Por favor, selecciona una modalidad.';
       }
       if (Object.keys(this.errors).length === 0) {
@@ -112,7 +82,7 @@ export default {
     },
     submitForm() {
       this.isFormValid = true
-      this.userStore.editProfile(this.user);
+      this.userStore.editProfile(this.userData);
     }
     // TODO: limpiar el codigo repetido
   },
@@ -135,17 +105,17 @@ export default {
           <div class="tab-2">
             <label for="tab2-1">Formulario de preferencias laborales</label>
             <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-            <div>
+            <div v-if="userData && userData.userable">
               <form class="form__perfil" @submit.prevent="validateForm">
                 <h2>Formulario de preferencias laborales</h2>
                 <legend> Selecciona tus preferencias Laborales</legend>
                 <p>Tipo de contrato</p>
                 <select class="home__select"
-                        v-model="user.userable.contract_type">
+                        v-model="userData.userable['contract_type']">
                   <option class="home__select__option" disabled value="">Selecciona un tipo de contrato</option>
                   <option class="home__select__option"
                           id="contrato"
-                          v-for="option in selectContractOptions"
+                          v-for="option in selectStore.contractSelectData"
                           :key="option.value"
                           :value="option.value">{{ option.label }}
                   </option>
@@ -153,11 +123,11 @@ export default {
                 <p class="error" v-if="errors.contract_type">{{ errors.contract_type }}</p>
                 <p>Tipo de Jornada laboral</p>
                 <select class="home__select"
-                        v-model="user.userable.schedule">
+                        v-model="userData.userable['schedule']">
                   <option class="home__select__option" disabled value="">Selecciona un tipo de jornada</option>
                   <option class="home__select__option"
                           id="jornada"
-                          v-for="option in selectScheduleOptions"
+                          v-for="option in selectStore.scheduleSelectData"
                           :key="option.value"
                           :value="option.value">{{ option.label }}
                   </option>
@@ -165,11 +135,11 @@ export default {
                 <p class="error" v-if="errors.schedule">{{ errors.schedule }}</p>
                 <p>Especialidad que mas se ajuste a tu perfil</p>
                 <select class="home__select"
-                        v-model="user.userable.specialization">
+                        v-model="userData.userable['specialization']">
                   <option class="home__select__option" disabled value="">Selecciona una especialidad</option>
                   <option class="home__select__option"
                           id="especialidad"
-                          v-for="option in selectSpecializationOptions"
+                          v-for="option in selectStore.specializationSelectData"
                           :key="option.value"
                           :value="option.value">{{ option.label }}
                   </option>
@@ -177,11 +147,11 @@ export default {
                 <p class="error" v-if="errors.specialization">{{ errors.specialization }}</p>
                 <p>Modalidad de trabajo</p>
                 <select class="home__select"
-                        v-model="user.userable.work_mode">
+                        v-model="userData.userable['work_mode']">
                   <option class="home__select__option" disabled value="">Selecciona una modalidad de trabajo</option>
                   <option class="home__select__option"
                           id="modalidad"
-                          v-for="option in selectWorkOptions"
+                          v-for="option in selectStore.workSelectData"
                           :key="option.value"
                           :value="option.value">{{ option.label }}
                   </option>
