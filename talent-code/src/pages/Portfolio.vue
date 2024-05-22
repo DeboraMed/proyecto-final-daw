@@ -1,47 +1,64 @@
 <script setup>
-// TODO: traer los datos de la API
+
+import {useUserStore} from "../stores/UserStore.js";
+import {onMounted, ref} from "vue";
+import axios from "axios";
+const userStore = useUserStore();
+
+
+// Definir una ref para almacenar los proyectos
+let projects = ref([]);
+
+// Función para obtener los proyectos del usuario
+const fetchUserProjects = async () => {
+  const config = {
+    headers: {Authorization: `Bearer ${userStore.token}`}
+  };
+  try {
+    const response = await axios.get('/api/v1/projects', config);
+    projects.value = response.data.projects;
+  } catch (error) {
+    console.error('Error al recuperar los proyectos:', error);
+  }
+};
+
+// Usar el hook onMounted para llamar a la función cuando el componente se monte
+onMounted(() => {
+  userStore.fetchUser();
+  fetchUserProjects();
+});
+
 </script>
 
 <template>
   <main class="container__div">
     <section class="container__form">
     </section>
-    <section>
+    <section v-if="userStore.userData && userStore.userData.userable">
       <div class="profile-container">
         <div class="profile-header">
-          <img src="../assets/perfiles/ejemploDePerfil.png" alt="Avatar del desarrollador" class="avatar">
+          <img :src="userStore.userData.avatar_url" alt="Avatar del desarrollador" class="avatar">
           <div class="profile-info">
-            <h1>Nombre del Desarrollador</h1>
-            <p>Descripción breve sobre el desarrollador. Puede incluir habilidades, experiencia, y objetivos
-              profesionales.</p>
-            <a href="https://github.com/tu-github" target="_blank" class="github-link">GitHub</a>
+            <h1>{{userStore.userData.name}}</h1>
+            <p>{{userStore.userData.description}}</p>
+            <a :href="userStore.userData.userable['github_url']" target="_blank" class="github-link">GitHub</a>
           </div>
         </div>
         <div class="projects-section">
           <h2>Proyectos</h2>
-          <div class="project">
+
+          <div v-for="project in projects" :key="project.id" class="project">
             <div class="project-content-image">
-              <img src="../assets/logotipo-v2-negativo.svg" alt="Imagen del proyecto 1" class="project-image">
+              <img :src="project.image_url" alt="Imagen del proyecto" class="project-image">
             </div>
 
             <div class="project-info">
-              <h2>Título del Proyecto 1</h2>
-              <p>Descripción breve del proyecto. Explicación de lo que hace el proyecto y su propósito. Aqui puedes
-                añadir los detalles de tu proyectos, como los has realizado, cuanto tiempo te ha llevado.</p>
+              <h2>{{project.title}}</h2>
+              <p>{{project.description}}</p>
               <p><strong>Tecnologías:</strong>
-                <span class="project-info-tecnologias">HTML</span><span class="project-info-tecnologias">CSS</span><span
-                    class="project-info-tecnologias">Javascript</span></p>
-            </div>
-          </div>
-          <div class="project">
-            <div class="project-content-image">
-              <img src="../assets/logotipo-v2-positivo.svg" alt="Imagen del proyecto 2" class="project-image">
-            </div>
-            <div class="project-info">
-              <h2>Título del Proyecto 2</h2>
-              <p>Descripción breve del proyecto. Explicación de lo que hace el proyecto y su propósito.</p>
-              <p><strong>Tecnologías:</strong>
-                <span class="project-info-tecnologias">Python</span><span class="project-info-tecnologias">Django</span>
+                <span v-for="technology in project.technologies" :key="technology.name" class="project-info-tecnologias">
+                  {{technology.name}}
+                </span>
               </p>
             </div>
           </div>

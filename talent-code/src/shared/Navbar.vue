@@ -63,7 +63,7 @@ export default {
       <div class="navbar__content">
         <router-link v-show="userStore.isLogged() && userStore.userType() ==='developer'" class="nav__router__pri" to="/portfolio">Portfolio</router-link>
         <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
-        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/">Salir</router-link>
+        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/" @click="userStore.logout()">Salir</router-link>
       </div>
       <dark-mode/>
     </div>
