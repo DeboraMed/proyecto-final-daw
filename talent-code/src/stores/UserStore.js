@@ -19,17 +19,23 @@ export const useUserStore = defineStore('user', {
         },
         register(user) {
             const alertStore = useAlertStore();
-            let json = {
-                'name': user.name,
-                'email': user.email,
-                'password': user.password,
-                'user_type': user.user_type,
-                'description': user.description,
-                'phone': user.phone,
-                'address': user.address,
-                'avatar': user.avatar,
-            };
-            axios.post('/api/v1/register', json)
+
+            const formData = new FormData();
+            formData.append('avatar', user.avatar);
+            formData.append('user_data', JSON.stringify({
+                name: user.name,
+                email: user.email,
+                password: user.password,
+                user_type: user.user_type,
+                description: user.description,
+                phone: user.phone,
+                address: user.address,
+            }));
+            console.log(formData);
+            axios.post('/api/v1/register', formData,  {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }})
                 .then(data => {
                     if (data.statusText === "Created") {
                         console.log('Se ha registrado correctamente');

@@ -24,6 +24,7 @@ export default {
         address: '',
         avatar: '',
       },
+      avatar_preview: '',
       errors: {},
       isFormValid: false
     }
@@ -37,8 +38,8 @@ export default {
         this.errors.name = 'Introduce un nombre con al menos 3 caracteres.';
       } else if (!this.user.email || !/\w+@\w+\.+[a-z]/.test(this.user.email)) {
         this.errors.email = 'Introduce un correo electrónico válido.';
-      } else if (!this.user.password || this.user.password.length < 2) {
-        this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
+      } else if (!this.user.password || this.user.password.length < 7) {
+        this.errors.password = 'Introduce un contraseña con al menos 8 caracteres.';
       } else if (!this.user.description) {
         this.errors.description = 'La descripción es requerida.';
       } else if (!this.user.phone) {
@@ -47,8 +48,6 @@ export default {
         this.errors.address = 'La dirección es requerida.';
       } else if (!this.user.avatar) {
         this.errors.avatar = 'El avatar es requerido.';
-      } else if (!/^https?:\/\/.*/.test(this.user.avatar)) {
-        this.errors.avatar = 'El avatar debe ser una URL válida.';
       } else if (!this.user.user_type) {
         this.errors.user_type = 'Por favor, selecciona si eres un desarrollador o una empresa.';
       }
@@ -64,6 +63,17 @@ export default {
       //TODO: implementar logica de file para avatar
       console.log(event.target.files);
     },
+    handleFileUpload(event)  {
+      const file = event.target.files[0];
+      this.user.avatar = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.avatar_preview = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
   }
 }
 </script>
@@ -128,16 +138,12 @@ export default {
           </fieldset>
           <fieldset>
             <label for="avatar">Avatar</label>
-            <input type="url"
+            <input type="file"
                    id="avatar"
-                   v-model="user.avatar"
-                   placeholder="Avatar"/>
+                   @change="handleFileUpload"/>
             <p class="error" v-if="errors.avatar">{{ errors.avatar }}</p>
+            <img v-if="avatar_preview" :src="avatar_preview" alt="Preview Avatar" class="avatar-preview"/>
           </fieldset>
-          <!-- <input type="file"
-                      @change="previewFiles"
-                      placeholder="Avatar"/>-->
-
           <!-- Seleccion desarrollador o empresa -->
           <div><p>¿Eres un desarrollador o una empresa?</p>
             <fieldset>
