@@ -1,22 +1,34 @@
 <script setup>
 
 import {useUserStore} from "../stores/UserStore.js";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import axios from "axios";
+import {useRoute} from "vue-router";
 const userStore = useUserStore();
 
-
 // Definir una ref para almacenar los proyectos
-let projects = ref([]);
+let developer = ref();
+
+const route = useRoute()
+
+// Vigilar si existen cambios en la URL para recargar
+watch(() => route, () => {
+  fetchDeveloper(route.params.id)
+}, {
+  deep: true
+})
 
 // Función para obtener los proyectos del usuario
-const fetchUserProjects = async () => {
-  const config = {
-    headers: {Authorization: `Bearer ${userStore.token}`}
-  };
+const fetchDeveloper = async (userId) => {
+
+  if(!userId) {
+    await userStore.fetchUser();
+    userId = userStore.userData.id;
+  }
+
   try {
-    const response = await axios.get('/api/v1/projects', config);
-    projects.value = response.data.projects;
+    const response = await axios.get('/api/v1/developer/' + userId);
+    developer.value = response.data.developer;
   } catch (error) {
     console.error('Error al recuperar los proyectos:', error);
   }
@@ -24,8 +36,8 @@ const fetchUserProjects = async () => {
 
 // Usar el hook onMounted para llamar a la función cuando el componente se monte
 onMounted(() => {
-  userStore.fetchUser();
-  fetchUserProjects();
+  const route = useRoute();
+  fetchDeveloper(route.params.id);
 });
 
 </script>
@@ -34,25 +46,25 @@ onMounted(() => {
   <main class="container__div">
     <section class="container__form">
     </section>
-    <section v-if="userStore.userData && userStore.userData.userable">
+    <section v-if="developer">
       <div class="profile-container">
         <div class="profile-header">
-          <img :src="userStore.userData.avatar_url" alt="Avatar del desarrollador" class="avatar">
+          <img :src="developer.user['avatar_url']" alt="Avatar del desarrollador" class="avatar">
           <div class="profile-info">
-            <h1>{{userStore.userData.name}}</h1>
-            <p>{{userStore.userData.description}}</p>
-            <a :href="userStore.userData.userable['github_url']" target="_blank" class="github-link">GitHub</a>
+            <h1>{{developer.user['name']}}</h1>
+            <p>{{developer.user['description']}}</p>
+            <a :href="developer.github_url" target="_blank" class="github-link">GitHub</a>
           </div>
         </div>
-        <div class="projects-section">
+        <div class="developers-section">
           <h2>Proyectos</h2>
 
-          <div v-for="project in projects" :key="project.id" class="project">
-            <div class="project-content-image">
-              <img :src="project.image_url" alt="Imagen del proyecto" class="project-image">
+          <div v-for="project in developer.projects" :key="project.id" class="developer">
+            <div class="developer-content-image">
+              <img :src="project.image_url" alt="Imagen del proyecto" class="developer-image">
             </div>
 
-            <div class="project-info">
+            <div class="developer-info">
               <h2>{{project.title}}</h2>
               <p>{{project.description}}</p>
               <p><strong>Tecnologías:</strong>
@@ -134,17 +146,17 @@ h2 {
   background-color: #555;
 }
 
-.projects-section {
+.developers-section {
   margin-top: 20px;
   text-align: left;
 }
 
-.projects-section h2 {
+.developers-section h2 {
   margin-bottom: 20px;
   color: #333;
 }
 
-.project {
+.developer {
   display: flex;
   margin-bottom: 20px;
   background-color: #f9f9f9;
@@ -152,14 +164,14 @@ h2 {
   border-radius: 8px;
 }
 
-.project-content-image {
+.developer-content-image {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.project-image {
+.developer-image {
   width: 150px;
   height: 150px;
   margin-right: 20px;
@@ -167,22 +179,22 @@ h2 {
   object-fit: cover;
 }
 
-.project-info {
+.developer-info {
   flex: 1;
   text-align: left;
 }
 
-.project-info h3 {
+.developer-info h3 {
   margin: 0 0 10px;
   color: #333;
 }
 
-.project-info p {
+.developer-info p {
   margin: 0 0 5px;
   color: #666;
 }
 
-.project-info strong {
+.developer-info strong {
   color: #333;
 }
 

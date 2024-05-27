@@ -29,7 +29,7 @@ const routes = [
         component: () => import('../pages/Recluta.vue')
     },
     {
-        path: '/portfolio',
+        path: '/portfolio/:id?',
         component: () => import('../pages/Portfolio.vue')
     },
     {
