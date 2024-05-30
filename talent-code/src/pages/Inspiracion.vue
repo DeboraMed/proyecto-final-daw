@@ -10,7 +10,7 @@ let developers = ref([]);
 // Función para obtener los proyectos del usuario
 const fetchDevelopers = async () => {
   try {
-    const response = await axios.get('/api/v1/developer/all');
+    const response = await axios.get('/api/v1/developer/random');
     developers.value = response.data.developers;
   } catch (error) {
     console.error('Error al recuperar los desarrolladores:', error);
@@ -41,6 +41,13 @@ onMounted(() => {
 </template>
 
 <style scoped>
+p {
+  padding-bottom: 10px;
+}
+
+h2 {
+  margin-top: 10px;
+}
 
 .profile-info h1 {
   margin: 0 0 10px;

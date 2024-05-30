@@ -56,15 +56,15 @@ onMounted(() => {
             <a :href="developer.github_url" target="_blank" class="github-link">GitHub</a>
           </div>
         </div>
-        <div class="developers-section">
+        <div class="projects-section">
           <h2>Proyectos</h2>
 
-          <div v-for="project in developer.projects" :key="project.id" class="developer">
-            <div class="developer-content-image">
-              <img :src="project.image_url" alt="Imagen del proyecto" class="developer-image">
+          <div v-for="project in developer.projects" :key="project.id" class="project">
+            <div class="project-content-image">
+              <img :src="project.image_url" alt="Imagen del proyecto" class="project-image">
             </div>
 
-            <div class="developer-info">
+            <div class="project-info">
               <h2>{{project.title}}</h2>
               <p>{{project.description}}</p>
               <p><strong>Tecnologías:</strong>
@@ -146,17 +146,17 @@ h2 {
   background-color: #555;
 }
 
-.developers-section {
+.projects-section {
   margin-top: 20px;
   text-align: left;
 }
 
-.developers-section h2 {
+.projects-section h2 {
   margin-bottom: 20px;
   color: #333;
 }
 
-.developer {
+.project {
   display: flex;
   margin-bottom: 20px;
   background-color: #f9f9f9;
@@ -164,14 +164,14 @@ h2 {
   border-radius: 8px;
 }
 
-.developer-content-image {
+.project-content-image {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.developer-image {
+.project-image {
   width: 150px;
   height: 150px;
   margin-right: 20px;
@@ -179,22 +179,22 @@ h2 {
   object-fit: cover;
 }
 
-.developer-info {
+.project-info {
   flex: 1;
   text-align: left;
 }
 
-.developer-info h3 {
+.project-info h3 {
   margin: 0 0 10px;
   color: #333;
 }
 
-.developer-info p {
+.project-info p {
   margin: 0 0 5px;
   color: #666;
 }
 
-.developer-info strong {
+.project-info strong {
   color: #333;
 }
 

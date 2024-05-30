@@ -33,6 +33,10 @@ const routes = [
         component: () => import('../pages/Portfolio.vue')
     },
     {
+        path: '/empresa/:id',
+        component: () => import('../pages/Empresa.vue')
+    },
+    {
         path: '/login',
         component: () => import('../pages/Login.vue')
     },   {
