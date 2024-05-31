@@ -26,11 +26,13 @@ onMounted(() => {
     <div class="vacancies-section">
       <div v-for="vacancy in vacancies" :key="vacancy.id" class="vacancy">
         <div class="company-content-image">
+          <router-link :to="'/empresa/' + vacancy.company['id']">
           <img :src="vacancy.company['user']['avatar_url']" alt="Imagen de la Empresa" class="company-image">
+          <h3 class="company-name">{{vacancy.company['user']['name']}}</h3>
+          </router-link>
         </div>
 
         <div class="vacancy-info">
-          <h1><router-link :to="'/empresa/' + vacancy.company['id']">{{vacancy.company['user']['name']}}</router-link></h1>
           <h2>{{vacancy.title}}</h2>
           <p>{{vacancy.description}}</p>
           <p><strong>Tecnologías:</strong>
@@ -91,7 +93,17 @@ h2 {
   position: relative;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
+}
+
+.company-name {
+  text-align: center;
+  margin: 0 20px 0 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  width: 100%;
+  max-width: 150px;
 }
 
 .company-image {
