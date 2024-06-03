@@ -22,7 +22,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="container__div">
+  <main>
+    <div class="header">
+      <h1> Ofertas de empleo</h1>
+      <p>Encontraras una gran variedad de ofertas de empleo Talent.Code</p>
+    </div>
+    <div class="container__div">
     <div class="vacancies-section">
       <div v-for="vacancy in vacancies" :key="vacancy.id" class="vacancy">
         <div class="company-content-image">
@@ -31,7 +36,7 @@ onMounted(() => {
           <h3 class="company-name">{{vacancy.company['user']['name']}}</h3>
           </router-link>
         </div>
-
+        <router-link :to="'/empresa/' + vacancy.company['id']">
         <div class="vacancy-info">
           <h2>{{vacancy.title}}</h2>
           <p>{{vacancy.description}}</p>
@@ -46,7 +51,9 @@ onMounted(() => {
             <span class="vacancy-info-tecnologias">{{vacancy.schedule}}</span>
           </p>
         </div>
+        </router-link>
       </div>
+    </div>
     </div>
   </main>
 </template>

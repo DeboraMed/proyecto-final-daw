@@ -125,7 +125,9 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+.header {
+  padding-top: 3rem;
+}
 .error {
   color: var(--font-color-p-error);
   font-size: medium;

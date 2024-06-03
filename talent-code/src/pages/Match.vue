@@ -25,7 +25,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="container__div">
+  <main>
+    <div class="header">
+      <h1>Matchmaking: Uniendo Talentos y Tecnología</h1>
+      <p>Descubre las ofertas de empleo donde mejor encajas en Talent.Code</p>
+    </div>
+    <div class="container__div">
     <div class="vacancies-section">
       <div v-for="jobmatch in jobmatches" :key="jobmatch.id" class="vacancy-wrapper">
         <div class="highlight">
@@ -55,6 +60,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   </main>
 </template>

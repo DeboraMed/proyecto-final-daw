@@ -24,7 +24,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="container__div">
+  <main>
+    <div class="header">
+      <h1> Donde los desarrolladores descubren nuevos destinos</h1>
+      <p>Los mejores talentos en Talen.Code</p>
+    </div>
+    <div class="container__div">
     <div class="developers-section">
       <div v-for="developer in developers" :key="developer.id" class="developer">
         <div class="developer-content-image">
@@ -36,6 +41,7 @@ onMounted(() => {
           <p>{{developer.user.description}}</p>
         </div>
       </div>
+    </div>
     </div>
   </main>
 </template>
