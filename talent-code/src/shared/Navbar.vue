@@ -50,6 +50,7 @@ export default {
       <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
       <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
       <router-link v-show="userStore.isLogged() && userStore.userType() ==='company'" class="nav__router__pri" to="/recluta">Recluta</router-link>
+      <router-link v-show="userStore.isLogged() && userStore.userType() ==='developer'" class="nav__router__pri" to="/match">Match</router-link>
       <div class="nav__router__pri__button">
         <router-link v-show="!userStore.isLogged()" to="/login">
           <button class="navbar__button">Inicia Sesión</button>
@@ -57,7 +58,6 @@ export default {
         <router-link v-show="!userStore.isLogged()" to="/registro">
           <button class="navbar__button">Regístrate</button>
         </router-link>
-
       </div>
       <!-- Parte de usuario logueado -->
       <div class="navbar__content">

@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import Home from "../pages/Home.vue";
 
 const routes = [
@@ -48,13 +48,17 @@ const routes = [
         component: () => import('../pages/Perfil.vue')
     },
     {
+        path: '/match',
+        component: () => import('../pages/Match.vue')
+    },
+    {
         path: '/:pathMach(.*)*',
         component: () => import('../pages/404.vue')
     },
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
 })
 
