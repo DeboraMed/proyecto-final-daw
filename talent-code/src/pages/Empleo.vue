@@ -2,9 +2,32 @@
 
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import {useSelectStore} from "../stores/SelectStore.js";
+import {useUserStore} from "../stores/UserStore.js";
+import {useAlertStore} from "../stores/AlertStore.js";
 
+const userStore = useUserStore();
+const alertStore = useAlertStore();
+const selectStore = useSelectStore();
 
+let expandedCategories = ref({
+  specialization: true,
+  schedule: true,
+  work_mode: true,
+  contract_type: true,
+});
+
+const toggleCategory = (category) => {
+  expandedCategories.value[category] = !expandedCategories.value[category];
+};
+ //TODO: voy por aqui con los filtros
 let vacancies = ref([]);
+let filters = ref({
+  specialization: '',
+  schedule: '',
+  work_mode: '',
+  contract_type: '',
+});
 
 const fetchVacancies = async () => {
   try {
@@ -33,10 +56,9 @@ onMounted(() => {
         <div class="company-content-image">
           <router-link :to="'/empresa/' + vacancy.company['id']">
           <img :src="vacancy.company['user']['avatar_url']" alt="Imagen de la Empresa" class="company-image">
-          <h3 class="company-name">{{vacancy.company['user']['name']}}</h3>
+          <h3 class="company-name">{{ vacancy.company['user']['name']}}</h3>
           </router-link>
         </div>
-        <router-link :to="'/empresa/' + vacancy.company['id']">
         <div class="vacancy-info">
           <h2>{{vacancy.title}}</h2>
           <p>{{vacancy.description}}</p>
@@ -50,8 +72,13 @@ onMounted(() => {
             <span class="vacancy-info-tecnologias">{{vacancy.work_mode}}</span>
             <span class="vacancy-info-tecnologias">{{vacancy.schedule}}</span>
           </p>
+          <div class="button-container">
+            <button v-if="userStore.isLogged() && userStore.userType() ==='developer'" @click="alertStore.success('Se ha registrado en la vacante correctamente.');" class="generic-button">
+              Presentar candidatura
+            </button>
+          </div>
         </div>
-        </router-link>
+
       </div>
     </div>
     </div>

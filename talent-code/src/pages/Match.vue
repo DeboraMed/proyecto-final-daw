@@ -1,15 +1,17 @@
 <script setup>
-import { useUserStore } from "../stores/UserStore.js";
-import { onMounted, ref } from "vue";
+import {useUserStore} from "../stores/UserStore.js";
+import {onMounted, ref} from "vue";
 import axios from "axios";
+import {useAlertStore} from "../stores/AlertStore.js";
 
 const userStore = useUserStore();
+const alertStore = useAlertStore();
 let jobmatches = ref([]);
 
 const fetchVacancies = async () => {
   try {
     const config = {
-      headers: { Authorization: `Bearer ${userStore.token}` }
+      headers: {Authorization: `Bearer ${userStore.token}`}
     };
     const response = await axios.get('/api/v1/job-matches', config);
     console.log(response);
@@ -27,40 +29,46 @@ onMounted(() => {
 <template>
   <main>
     <div class="header">
-      <h1>Matchmaking: Uniendo Talentos y Tecnología</h1>
+      <h1>Matchmaking: Uniendo Talentos y Empresas</h1>
       <p>Descubre las ofertas de empleo donde mejor encajas en Talent.Code</p>
     </div>
     <div class="container__div">
-    <div class="vacancies-section">
-      <div v-for="jobmatch in jobmatches" :key="jobmatch.id" class="vacancy-wrapper">
-        <div class="highlight">
-          <p class="score">{{ jobmatch.score }}% - {{ jobmatch.notes }}</p>
-        </div>
-        <div class="vacancy">
-          <div class="company-content-image">
-            <router-link :to="'/empresa/' + jobmatch.vacancy.company.id">
-              <img :src="jobmatch.vacancy.company.user.avatar_url" alt="Imagen de la Empresa" class="company-image">
-              <h3 class="company-name">{{ jobmatch.vacancy.company.user.name }}</h3>
-            </router-link>
+      <div class="vacancies-section">
+        <div v-for="jobmatch in jobmatches" :key="jobmatch.id" class="vacancy-wrapper">
+          <div class="highlight">
+            <p class="score"><span style="font-weight: bolder">{{ jobmatch.score }}%</span> - {{ jobmatch.notes }}</p>
           </div>
+          <div class="vacancy">
+            <div class="company-content-image">
+              <router-link :to="'/empresa/' + jobmatch.vacancy.company.id">
+                <img :src="jobmatch.vacancy.company.user.avatar_url" alt="Imagen de la Empresa" class="company-image">
+                <h3 class="company-name">{{ jobmatch.vacancy.company.user.name }}</h3>
+              </router-link>
+            </div>
 
-          <div class="vacancy-info">
-            <h2>{{ jobmatch.vacancy.title }}</h2>
-            <p>{{ jobmatch.vacancy.description }}</p>
-            <p><strong>Tecnologías:</strong>
-              <span v-for="technology in jobmatch.vacancy.technologies" :key="technology.name" class="vacancy-info-tecnologias">
+            <div class="vacancy-info">
+              <h2>{{ jobmatch.vacancy.title }}</h2>
+              <p>{{ jobmatch.vacancy.description }}</p>
+              <p><strong>Tecnologías:</strong>
+                <span v-for="technology in jobmatch.vacancy.technologies" :key="technology.name"
+                      class="vacancy-info-tecnologias">
                 {{ technology.name }}
               </span>
-            </p>
-            <p>
-              <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.contract_type }}</span>
-              <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.work_mode }}</span>
-              <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.schedule }}</span>
-            </p>
+              </p>
+              <p>
+                <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.contract_type }}</span>
+                <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.work_mode }}</span>
+                <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.schedule }}</span>
+              </p>
+              <div class="button-container">
+                <button v-if="userStore.isLogged() && userStore.userType() ==='developer'" @click="alertStore.success('Se ha registrado en la vacante correctamente.');" class="generic-button">
+                  Presentar candidatura
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   </main>
 </template>
@@ -165,7 +173,7 @@ h2 {
 
 .highlight p {
   margin: 0;
-  font-size: 14px;
+  font-size: 18px;
   color: darkolivegreen;
   padding: 0;
 }

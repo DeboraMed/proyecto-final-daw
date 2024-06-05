@@ -64,8 +64,8 @@ const toggleFilter = (category, value) => {
 <template>
   <main>
     <div class="header">
-      <h1> Encuentra desarrolladores</h1>
-      <p>Los mejores talentos en Talen.Code</p>
+      <h1>Encuentra a Desarrolladores</h1>
+      <p>Los mejores talentos en Talent.Code</p>
     </div>
     <div class="container__div">
       <div class="filter-menu">
@@ -143,10 +143,13 @@ const toggleFilter = (category, value) => {
         <div v-else v-for="developer in developers" :key="developer.id" class="developer">
           <div class="developer-content-image">
             <img :src="developer.user['avatar_url']" alt="Avatar del desarrollador" class="developer-image">
+            <div class="">
+              <router-link class="generic-button" :to="'/portfolio/' + developer.id">Ver el Perfil</router-link>
+            </div>
           </div>
           <div class="developer-info">
             <h2>
-              <router-link :to="'/portfolio/' + developer.id">{{ developer.user.name }}</router-link>
+              {{ developer.user.name }}
             </h2>
             <p>{{ developer.user.description }}</p>
           </div>
@@ -165,6 +168,22 @@ input {
   border-radius: 0.7rem;
   padding: 0;
   margin: 0;
+}
+
+.generic-button {
+  display: inline-block;
+  font-weight: lighter;
+  margin-top: 2px;
+  padding: 5px 30px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.generic-button:hover {
+  background-color: #555;
 }
 
 .container__div {
@@ -197,14 +216,16 @@ input {
 .developer-content-image {
   position: relative;
   display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  margin-right: 20px;
 }
 
 .developer-image {
   width: 150px;
   height: 150px;
-  margin-right: 20px;
   border-radius: 8px;
   object-fit: cover;
 }

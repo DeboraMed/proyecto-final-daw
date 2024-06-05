@@ -38,7 +38,6 @@ export default {
 
 <template>
 <section>
-<!--  TODO: mostrar opciones segun tipo de usuario company o developer-->
   <nav class="nav">
     <!-- Menu normal-->
     <div v-if="!windowSmall" class="navbar__content">
