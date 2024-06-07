@@ -15,18 +15,18 @@ document.documentElement.setAttribute('data-theme', store.theme);
 /* Dark Mode CSS*/
 [data-theme="light"] {
   --font-color: #000000;
-  --font-color-h2-pri: #4c3b9a;
+  --font-color-h2-pri: #2f6c54;
   --font-color-h2-sec: #c2431e;
 
   --font-color-p-error: #c2431e;
 
-  --a-color: #4c3b9a;
+  --a-color: #2f6c54;
   --a-color-ft: #ffffff;
-  --a-color-hover: #747bff;
+  --a-color-hover: #5aad8d;
 
   --bt-color-1: #ffffff;
-  --bt-color-1-after: #7563c7;
-  --bt-color-1-before: #4c3b9a;
+  --bt-color-1-after: #5aad8d;
+  --bt-color-1-before: #2f6c54;
 
   --bt-color-2: #fff;
   --bt-color-2-after: #e76c49;
@@ -37,8 +37,8 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --bg-color-medium: #FFEFC9;
   --bg-color-dark: #FCBD7A;
 
-  --ft-bg-color-medium: #4E3D90;
-  --ft-bg-color-dark: #2E2067;
+  --ft-bg-color-medium: #2f6c54;
+  --ft-bg-color-dark: #174231;
 
 }
 
@@ -50,7 +50,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --font-color-p-error: #f18465;
 
   --a-color: #ffffff;
-  --a-color-hover: #747bff;
+  --a-color-hover: #5aad8d;
 
   --bt-color-1: #ffffff;
   --bt-color-1-after: #e76c49;

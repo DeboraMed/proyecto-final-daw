@@ -100,7 +100,6 @@ export default {
       </article>
       <div v-if="perfilPendiente">
         <div class="tabs">
-
           <!-- Primera tab-->
           <div class="tab-2">
             <label for="tab2-1">Formulario de preferencias laborales</label>

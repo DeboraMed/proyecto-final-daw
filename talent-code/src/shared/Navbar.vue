@@ -8,21 +8,22 @@ const userStore = useUserStore();
 
 <script>
 import DarkMode from "../pages/DarkMode.vue";
+
 export default {
   components: {},
-  data(){
+  data() {
     return {
       isMenuOpen: false,
       openBurguerMenu: false,
       windowSmall: false,
     }
   },
-  mounted(){
+  mounted() {
     // escucha el cambio de tamaño y llama al metodo
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
   },
-  beforeDestroy(){
+  beforeDestroy() {
     window.removeEventListener('resize', this.handleResize);
   },
   methods: {
@@ -37,38 +38,82 @@ export default {
 </script>
 
 <template>
-<section>
-  <nav class="nav">
-    <!-- Menu normal-->
-    <div v-if="!windowSmall" class="navbar__content">
+  <section>
+    <nav class="nav">
       <router-link to="/">
-        <div v-if="themeStore.theme === 'dark'"><img src="../assets/logotipo-v2-negativo-horizontal.svg" class="nav__logo" alt="talent.code"></div>
+        <div v-if="themeStore.theme === 'dark'"><img src="../assets/logotipo-v2-negativo-horizontal.svg"
+                                                     class="nav__logo" alt="talent.code"></div>
         <div v-else><img src="../assets/logotipo-v2-positivo-horizontal.svg" alt="talent.code"></div>
       </router-link>
-      <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
-      <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
-      <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
-      <router-link v-show="userStore.isLogged() && userStore.userType() ==='company'" class="nav__router__pri" to="/recluta">Recluta</router-link>
-      <router-link v-show="userStore.isLogged() && userStore.userType() ==='developer'" class="nav__router__pri" to="/match">Match</router-link>
-      <div class="nav__router__pri__button">
-        <router-link v-show="!userStore.isLogged()" to="/login">
-          <button class="navbar__button">Inicia Sesión</button>
+      <!-- Menu normal-->
+      <div v-if="!windowSmall" class="navbar__content">
+        <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
+        <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
+        <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
+        <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='company'"
+                     class="nav__router__pri" to="/recluta">Recluta
         </router-link>
-        <router-link v-show="!userStore.isLogged()" to="/registro">
-          <button class="navbar__button">Regístrate</button>
+        <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
+                     class="nav__router__pri" to="/match">Match
         </router-link>
+        <div class="nav__router__pri__button">
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/login">
+            <button class="navbar__button">Inicia Sesión</button>
+          </router-link>
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/registro">
+            <button class="navbar__button">Regístrate</button>
+          </router-link>
+        </div>
+        <!-- Parte de usuario logueado -->
+        <div class="navbar__content">
+          <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
+                       class="nav__router__pri" to="/portfolio">Portfolio
+          </router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil
+          </router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/"
+                       @click="userStore.logout()">Salir
+          </router-link>
+        </div>
+        <dark-mode/>
       </div>
-      <!-- Parte de usuario logueado -->
-      <div class="navbar__content">
-        <router-link v-show="userStore.isLogged() && userStore.userType() ==='developer'" class="nav__router__pri" to="/portfolio">Portfolio</router-link>
-        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
-        <router-link v-show="userStore.isLogged()" class="nav__router__pri" to="/" @click="userStore.logout()">Salir</router-link>
-      </div>
-      <dark-mode/>
-    </div>
-    <!-- TODO: Falta añadir el menu burguer aqui -->
-  </nav>
-</section>
+      <!-- Menu hamburguesa-->
+      <ul v-else class="burger__menu">
+        <li v-if="openBurguerMenu" class="burger__menu__items">
+          <button v-show="isMenuOpen" class="navbar__toggle" @click="toggleMenu">☰</button>
+          <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
+          <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
+          <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='company'"
+                       class="nav__router__pri" to="/recluta">Recluta
+          </router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
+                       class="nav__router__pri" to="/match">Match
+          </router-link>
+          <div class="nav__router__pri__button">
+            <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/login">
+              <button class="navbar__button">Inicia Sesión</button>
+            </router-link>
+            <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/registro">
+              <button class="navbar__button">Regístrate</button>
+            </router-link>
+          </div>
+          <!-- Parte de usuario logueado -->
+          <div class="navbar__content">
+            <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
+                         class="nav__router__pri" to="/portfolio">Portfolio
+            </router-link>
+            <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil
+            </router-link>
+            <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/"
+                         @click="userStore.logout()">Salir
+            </router-link>
+          </div>
+        </li>
+        <button @click="toggleMenu" class="burger__button">&#9776;</button>
+      </ul>
+    </nav>
+  </section>
 </template>
 
 <style scoped>
@@ -80,7 +125,7 @@ export default {
   right: 5px;
   margin: 0 15px 0 0;
   font-weight: bold;
-  background-color: #FFF8E8;
+  background-color: #ffffff;
 }
 
 .burger__menu__items {
@@ -99,6 +144,7 @@ export default {
 .navbar__toggle {
   color: #000;
 }
+
 /* barra de navegacion */
 .nav {
   z-index: 3;
@@ -144,12 +190,14 @@ export default {
   display: flex;
   align-items: center;
 }
+
 .nav__router__pri__button {
   padding: 0.8rem 0.8rem;
   align-items: center;
 
 }
-.navbar__button{
+
+.navbar__button {
   margin-right: 1rem;
 }
 
@@ -158,6 +206,7 @@ img {
   /*margin-left: 1rem;*/
   margin-right: 1rem;
 }
+
 /*navbar medias*/
 @media screen and (max-width: 1200px) {
   .burger__menu__items {

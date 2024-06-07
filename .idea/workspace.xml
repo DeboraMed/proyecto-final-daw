@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: Mejoras de estilos y fix de filtros">
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: Añadidos botones y pulido de estilos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Match.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Match.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/DarkMode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/DarkMode.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Perfil.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/talent-code/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/style.css" afterDir="false" />
     </list>
@@ -98,7 +97,7 @@
       <workItem from="1715851666607" duration="46581000" />
       <workItem from="1717430511697" duration="573000" />
       <workItem from="1717434110666" duration="5172000" />
-      <workItem from="1717604897576" duration="7547000" />
+      <workItem from="1717604897576" duration="10433000" />
     </task>
     <task id="LOCAL-00001" summary="Actualizando el README">
       <option name="closed" value="true" />
@@ -204,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717440717691</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: Añadidos botones y pulido de estilos">
+      <option name="closed" value="true" />
+      <created>1717613023721</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1717613023721</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,6 +241,7 @@
     <MESSAGE value="feat: gestion del login y diseño del portfolio" />
     <MESSAGE value="feat:gestion de pestañas para perfil y formulario de preferencias laborales" />
     <MESSAGE value="feat: Mejoras de estilos y fix de filtros" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Mejoras de estilos y fix de filtros" />
+    <MESSAGE value="feat: Añadidos botones y pulido de estilos" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Añadidos botones y pulido de estilos" />
   </component>
 </project>

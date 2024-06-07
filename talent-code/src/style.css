@@ -213,12 +213,12 @@ fieldset {
 
 @media (prefers-color-scheme: light) {
     :root {
-        color: #213547;
+        color: #023833;
         background-color: #ffffff;
     }
 
     a:hover {
-        color: #747bff;
+        color: #5aad8d;
     }
 
     button {
