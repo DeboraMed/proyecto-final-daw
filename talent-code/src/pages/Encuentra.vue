@@ -50,6 +50,7 @@ const fetchDevelopers = async () => {
   }
 };
 
+
 onMounted(() => {
   fetchDevelopers();
   selectStore.fetchAllSelectOptionsEnums()
@@ -135,25 +136,28 @@ const toggleFilter = (category, value) => {
           </transition>
         </div>
       </div>
-
+      <!-- Empieza la lista de desarrolladores -->
       <div class="developers-section">
-        <div v-if="developers.length === 0">
-          No se encontraron desarrolladores que coincidan con los filtros seleccionados.
-        </div>
-        <div v-else v-for="developer in developers" :key="developer.id" class="developer">
-          <div class="developer-content-image">
-            <img :src="developer.user['avatar_url']" alt="Avatar del desarrollador" class="developer-image">
-            <div class="">
-              <router-link class="generic-button" :to="'/portfolio/' + developer.id">Ver el Perfil</router-link>
+        <transition-group name="fade" tag="div">
+          <div v-if="developers.length === 0">
+            No se encontraron desarrolladores que coincidan con los filtros seleccionados.
+          </div>
+          <div v-else v-for="developer in developers" :key="developer.id" class="developer">
+            <div class="developer-content-image">
+              <img :src="developer.user['avatar_url']" alt="Avatar del desarrollador" class="developer-image">
+              <div class="">
+                <router-link class="generic-profile-button" :to="'/portfolio/' + developer.id">Ir al Perfil
+                </router-link>
+              </div>
+            </div>
+            <div class="developer-info">
+              <h2>
+                {{ developer.user.name }}
+              </h2>
+              <p>{{ developer.user.description }}</p>
             </div>
           </div>
-          <div class="developer-info">
-            <h2>
-              {{ developer.user.name }}
-            </h2>
-            <p>{{ developer.user.description }}</p>
-          </div>
-        </div>
+        </transition-group>
       </div>
     </div>
   </main>
@@ -168,22 +172,6 @@ input {
   border-radius: 0.7rem;
   padding: 0;
   margin: 0;
-}
-
-.generic-button {
-  display: inline-block;
-  font-weight: lighter;
-  margin-top: 2px;
-  padding: 5px 30px;
-  background-color: #333;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.generic-button:hover {
-  background-color: #555;
 }
 
 .container__div {
@@ -231,6 +219,7 @@ input {
 }
 
 .developer-info {
+  color: #5d5d5d;
   flex: 1;
   text-align: left;
 }
@@ -240,19 +229,19 @@ input {
   transition: all 0.5s ease-in;
 }
 
-/* animación */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
 label {
   display: block;
   width: 100%;
   text-align: left;
   margin-bottom: 10px;
+}
+
+/* Animaciones */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -1,16 +1,32 @@
 <script setup>
+import {onMounted, ref} from "vue";
+import axios from "axios";
 
+let developers = ref([]);
+
+const fetchDevelopers = async () => {
+  try {
+    const response = await axios.get('/api/v1/developer/random');
+    developers.value = response.data.developers;
+  } catch (error) {
+    console.error('Error al recuperar los desarrolladores:', error);
+  }
+};
+
+// Usar el hook onMounted para llamar a la función cuando el componente se monte
+onMounted(() => {
+  fetchDevelopers();
+});
 </script>
 
 <template>
-  <main  class="container__div">
+  <main class="container__div">
     <div class="home__title">“Exhibe tu talento, expande tus horizontes”</div>
-    <div class="home__subtitle">Descubre a los mejores Desarrolladores en TalentCode </div>
+    <div class="home__subtitle">Descubre a los mejores Desarrolladores en TalentCode</div>
     <section>
       <router-link to="/empleo" custom v-slot="{ navigate }">
         <button class="home__button" @click="navigate" role="link">Oportunidades Laborales</button>
       </router-link>
-<!--      TODO: poner condicional si esta logueado y si es empresa-->
       <router-link to="/recluta" custom v-slot="{ navigate }">
         <button class="home__button" @click="navigate" role="link">Contratar a un desarrollador</button>
       </router-link>
@@ -18,35 +34,12 @@
     <section class="home__carousel">
       <div class="slider">
         <div class="slide-track">
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil.png" alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil2.png"  alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil3.png"  alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil.png" alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil2.png"  alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil3.png"  alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil3.png"  alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil3.png"  alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil3.png"  alt="" />
-          </div>
-          <div class="slide">
-            <img src="../assets/perfiles/ejemploDePerfil3.png"  alt="" />
+          <div v-for="developer in developers" :key="developer.id">
+            <div class="slide">
+              <router-link :to="'/portfolio/' + developer.id"><img :src="developer.user['avatar_url']"
+                                                                   alt="Avatar del desarrollador">
+                <p>{{ developer.user.name }}</p></router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -57,57 +50,52 @@
 
 <style lang="scss">
 /*Comment Ctrl + Alt + (number /)*/
-.home__title{
+.home__title {
   display: inline-flex;
   padding-top: 4rem;
   font-size: 4rem;
   flex-wrap: nowrap;
   font-weight: bolder;
 }
-.home__subtitle{
+
+.home__subtitle {
   padding-top: 2rem;
   font-size: x-large;
 }
-.home__button{
+
+.home__button {
   padding: 1rem 2rem;
   margin: 2rem 2rem;
 }
-.home__carousel{
+
+.home__carousel {
   display: flex;
   width: 100%;
   padding-top: 4rem;
 }
-/*Estilo del slide*/
-/*body {
-  align-items: center;
-  background: #E3E3E3;
-  display: flex;
-  height: 100vh;
-  justify-content: flex-start;
-  overflow-x: hidden;
-}*/
 
 @mixin white-gradient {
-  background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 $animationSpeed: 40s;
 
- /* Animation */
+/* Animation */
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-250px * 5))}
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 5))
+  }
 }
-
 
 /* Styling */
 .slider {
-  background: white;
-  /*sombra del slider*/
-  /*box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);*/
+  background: var(--bg-color-clear);
   height: 300px;
   margin: auto;
-  overflow:hidden;
+  overflow: hidden;
   position: relative;
   width: 100%;
 
@@ -144,6 +132,7 @@ $animationSpeed: 40s;
     height: 100px;
     width: 250px;
   }
+
   .slide img {
     height: 250px;
     width: 250px;

@@ -15,8 +15,8 @@ document.documentElement.setAttribute('data-theme', store.theme);
 /* Dark Mode CSS*/
 [data-theme="light"] {
   --font-color: #000000;
-  --font-color-h2-pri: #2f6c54;
-  --font-color-h2-sec: #c2431e;
+  --font-color-h2-pri: #ffffff;
+  --font-color-h2-sec: #3b8568;
 
   --font-color-p-error: #c2431e;
 
@@ -28,45 +28,30 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --bt-color-1-after: #5aad8d;
   --bt-color-1-before: #2f6c54;
 
-  --bt-color-2: #fff;
-  --bt-color-2-after: #e76c49;
-  --bt-color-2-before: #C2431E;
-
   --burguer-bg-color: #FFF8E8;
-  --bg-color-clear: #FFF8E8;
-  --bg-color-medium: #FFEFC9;
-  --bg-color-dark: #FCBD7A;
-
-  --ft-bg-color-medium: #2f6c54;
-  --ft-bg-color-dark: #174231;
-
+  --bg-color-clear: #ffffff;
+  --bg-color-medium: #f9f9f9;
+  --bg-color-dark: #174231;
 }
 
 [data-theme="dark"] {
   --font-color: #ffffff;
   --font-color-h2-pri: #ffffff;
-  --font-color-h2-sec: #efce97;
+  --font-color-h2-sec: #97efcd;
 
   --font-color-p-error: #f18465;
 
-  --a-color: #ffffff;
+  --a-color: #a6a6a6;
   --a-color-hover: #5aad8d;
 
   --bt-color-1: #ffffff;
-  --bt-color-1-after: #e76c49;
-  --bt-color-1-before: #C2431E;
+  --bt-color-1-after: #5aad8d;
+  --bt-color-1-before: #174231;
 
-  --bt-color-2: #fff;
-  --bt-color-2-after: #e76c49;
-  --bt-color-2-before: #C2431E;
-
-  --burguer-bg-color: #645c81;
-  --bg-color-clear: #645c81;
-  --bg-color-medium: #524b6e;
-  --bg-color-dark: #3F3661;
-
-  --ft-bg-color-medium: #292147;
-  --ft-bg-color-dark: #1c1634;
+  --burguer-bg-color: #5aad8d;
+  --bg-color-clear: #262c29;
+  --bg-color-medium: #737373;
+  --bg-color-dark: #174231;
 }
 
 /* boton Toggle */
@@ -78,7 +63,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   width: 60px;
   height: 30px;
   border-radius: 30px;
-  background-color: #333;
+  background-color: #676767;
   position: absolute;
   transition: all 0.5s ease-in;
   cursor: pointer;
@@ -90,7 +75,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #efce97;
+  background: #5aad8d;
   position: absolute;
   top: 50%;
   left: 3px;
@@ -103,7 +88,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
 }
 
 .toggle:checked::before {
-  background: #333;
+  background: #6c6c6c;
   left: 32px;
 }
 </style>

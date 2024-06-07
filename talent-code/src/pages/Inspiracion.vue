@@ -3,45 +3,62 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
-
-// Definir una ref para almacenar los proyectos
 let developers = ref([]);
+let visibleDevelopers = ref([]);
 
-// Función para obtener los proyectos del usuario
+
 const fetchDevelopers = async () => {
   try {
     const response = await axios.get('/api/v1/developer/random');
     developers.value = response.data.developers;
+    showDevelopersWithDelay();
   } catch (error) {
     console.error('Error al recuperar los desarrolladores:', error);
   }
 };
 
-// Usar el hook onMounted para llamar a la función cuando el componente se monte
+const showDevelopersWithDelay = () => {
+  developers.value.forEach((developer, index) => {
+    setTimeout(() => {
+      visibleDevelopers.value.push(developer);
+    }, index * 100); // Retraso de 100ms entre cada aparición
+  });
+};
+
 onMounted(() => {
   fetchDevelopers();
-  });
+});
 </script>
 
 <template>
   <main>
     <div class="header">
-      <h1> Donde los desarrolladores descubren nuevos destinos</h1>
-      <p>Los mejores talentos en Talen.Code</p>
+      <h1>Descubre nuevos desarrolladores para Inspirarte</h1>
+      <p>Conoce a nuestros desarrolladores de Talent.Code.</p>
     </div>
     <div class="container__div">
-    <div class="developers-section">
-      <div v-for="developer in developers" :key="developer.id" class="developer">
-        <div class="developer-content-image">
-          <img :src="developer.user['avatar_url']" alt="Avatar del desarrollador" class="developer-image">
-        </div>
-
-        <div class="developer-info">
-          <h2><router-link :to="'/portfolio/' + developer.id">{{developer.user.name}}</router-link></h2>
-          <p>{{developer.user.description}}</p>
-        </div>
+      <div class="developers-section">
+        <transition-group name="fade" tag="div">
+          <div v-if="developers.length === 0">
+            No se encontraron desarrolladores que coincidan con los filtros seleccionados.
+          </div>
+          <div v-else v-for="developer in visibleDevelopers" :key="developer.id" class="developer">
+            <div class="developer-content-image">
+              <img :src="developer.user['avatar_url']" alt="Avatar del desarrollador" class="developer-image">
+              <div class="">
+                <router-link class="generic-profile-button" :to="'/portfolio/' + developer.id">Ir al Perfil
+                </router-link>
+              </div>
+            </div>
+            <div class="developer-info">
+              <h2>
+                {{ developer.user.name }}
+              </h2>
+              <p>{{ developer.user.description }}</p>
+            </div>
+          </div>
+        </transition-group>
       </div>
-    </div>
     </div>
   </main>
 </template>
@@ -67,13 +84,8 @@ h2 {
 }
 
 .developers-section {
+  flex: 1;
   margin-top: 20px;
-  text-align: left;
-}
-
-.developers-section h2 {
-  margin-bottom: 20px;
-  color: #333;
 }
 
 .developer {
@@ -87,19 +99,22 @@ h2 {
 .developer-content-image {
   position: relative;
   display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  margin-right: 20px;
 }
 
 .developer-image {
   width: 150px;
   height: 150px;
-  margin-right: 20px;
   border-radius: 8px;
   object-fit: cover;
 }
 
 .developer-info {
+  color: #5d5d5d;
   flex: 1;
   text-align: left;
 }
@@ -118,4 +133,12 @@ h2 {
   color: #333;
 }
 
+/* Animaciones */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
 </style>

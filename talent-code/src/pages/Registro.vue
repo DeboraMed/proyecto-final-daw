@@ -12,7 +12,6 @@ export default {
     }
   },
   data() {
-    /*tipo desarrollador y empresa*/
     return {
       user: {
         name: '',
@@ -33,7 +32,6 @@ export default {
     validateForm() {
       this.errors = {};
 
-      // logica de validacion de formularios
       if (!this.user.name || typeof this.user.name !== 'string' || this.user.name.length < 3) {
         this.errors.name = 'Introduce un nombre con al menos 3 caracteres.';
       } else if (!this.user.email || !/\w+@\w+\.+[a-z]/.test(this.user.email)) {
@@ -59,10 +57,6 @@ export default {
         this.isFormValid = true
         this.userStore.register(this.user);
     },
-    previewFiles(event) {
-      //TODO: implementar logica de file para avatar
-      console.log(event.target.files);
-    },
     handleFileUpload(event)  {
       const file = event.target.files[0];
       this.user.avatar = event.target.files[0];
@@ -81,28 +75,26 @@ export default {
 <template>
   <main>
     <section class="container__form">
-      <!-- Formulario de registro para trabajadores -->
       <div>
         <h2>Formulario de registro </h2>
         <form class="form" @submit.prevent="validateForm">
-          <legend>Datos de registro</legend>
+
           <fieldset>
+            <legend>Datos de registro</legend>
             <label for="nombre">Nombre</label>
             <input type="text"
                    id="nombre"
                    v-model="user.name"
                    placeholder="Nombre"/>
             <p class="error" v-if="errors.name">{{ errors.name }}</p>
-          </fieldset>
-          <fieldset>
+            <br>
             <label for="email">Email</label>
             <input type="email"
                    id="email"
                    v-model="user.email"
                    placeholder="Correo electrónico"/>
             <p class="error" v-if="errors.email">{{ errors.email }}</p>
-          </fieldset>
-          <fieldset>
+            <br>
             <label for="password">Contraseña</label>
             <input type="password"
                    id="password"
@@ -110,6 +102,7 @@ export default {
                    placeholder="Contraseña"/>
             <p class="error" v-if="errors.password">{{ errors.password }}</p>
           </fieldset>
+
           <fieldset>
             <legend>Datos personales</legend>
             <label for="descripcion">Descripción</label>
@@ -175,4 +168,92 @@ export default {
 </template>
 
 <style scoped>
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 20px;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+
+}
+
+label {
+  margin-bottom: 5px;
+
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 80px;
+  resize: none;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.875em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.avatar-preview {
+  display: block;
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+div > p {
+  font-weight: bold;
+}
+
+div > fieldset {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+div > fieldset > div {
+  display: flex;
+  align-items: center;
+}
 </style>

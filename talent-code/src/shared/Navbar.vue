@@ -10,7 +10,7 @@ const userStore = useUserStore();
 import DarkMode from "../pages/DarkMode.vue";
 
 export default {
-  components: {},
+  components: {DarkMode},
   data() {
     return {
       isMenuOpen: false,
@@ -81,14 +81,14 @@ export default {
       <ul v-else class="burger__menu">
         <li v-if="openBurguerMenu" class="burger__menu__items">
           <button v-show="isMenuOpen" class="navbar__toggle" @click="toggleMenu">☰</button>
-          <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
-          <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
-          <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
+          <router-link class="nav__router" to="/encuentra">Encuentra desarrolladores</router-link>
+          <router-link class="nav__router" to="/inspiracion">Inspiración</router-link>
+          <router-link class="nav__router" to="/empleo">Empleo</router-link>
           <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='company'"
                        class="nav__router__pri" to="/recluta">Recluta
           </router-link>
           <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
-                       class="nav__router__pri" to="/match">Match
+                       class="nav__router" to="/match">Match
           </router-link>
           <div class="nav__router__pri__button">
             <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/login">
@@ -101,11 +101,11 @@ export default {
           <!-- Parte de usuario logueado -->
           <div class="navbar__content">
             <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
-                         class="nav__router__pri" to="/portfolio">Portfolio
+                         class="nav__router" to="/portfolio">Portfolio
             </router-link>
-            <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil
+            <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/perfil">Perfil
             </router-link>
-            <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/"
+            <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/"
                          @click="userStore.logout()">Salir
             </router-link>
           </div>
@@ -125,7 +125,7 @@ export default {
   right: 5px;
   margin: 0 15px 0 0;
   font-weight: bold;
-  background-color: #ffffff;
+  background-color: var(--burguer-bg-color);
 }
 
 .burger__menu__items {
@@ -142,7 +142,7 @@ export default {
 }
 
 .navbar__toggle {
-  color: #000;
+  color: var(--font-color);
 }
 
 /* barra de navegacion */
@@ -153,14 +153,14 @@ export default {
   left: 0;
   width: 100%;
   /*height: 5.5rem;*/
-  background-color: #fff;
+  background-color: var(--bg-color-clear);
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   border: solid 1px #cccccc;
   padding: 1rem 1rem;
   margin: 0 auto;
-  align-items: flex-start;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 .navbar__content {
@@ -195,6 +195,14 @@ export default {
   padding: 0.8rem 0.8rem;
   align-items: center;
 
+}
+
+a {
+  color: var(--a-color);
+}
+
+a:hover {
+  color: var(--a-color-hover);
 }
 
 .navbar__button {

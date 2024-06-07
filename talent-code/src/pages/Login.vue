@@ -70,4 +70,92 @@ export default {
 </template>
 
 <style scoped>
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 20px;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+
+}
+
+label {
+  margin-bottom: 5px;
+
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 80px;
+  resize: none;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.875em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.avatar-preview {
+  display: block;
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+div > p {
+  font-weight: bold;
+}
+
+div > fieldset {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+div > fieldset > div {
+  display: flex;
+  align-items: center;
+}
 </style>

@@ -47,7 +47,7 @@ onMounted(() => {
 <template>
   <main>
     <div class="header">
-      <h1> Ofertas de empleo</h1>
+      <h1>Ofertas de empleo para Desarrolladores</h1>
       <p>Encontraras una gran variedad de ofertas de empleo Talent.Code</p>
     </div>
     <div class="container__div">
@@ -73,8 +73,8 @@ onMounted(() => {
             <span class="vacancy-info-tecnologias">{{vacancy.schedule}}</span>
           </p>
           <div class="button-container">
-            <button v-if="userStore.isLogged() && userStore.userType() ==='developer'" @click="alertStore.success('Se ha registrado en la vacante correctamente.');" class="generic-button">
-              Presentar candidatura
+            <button :disabled="!userStore.isLogged() || userStore.userType() !== 'developer'" @click="alertStore.success('Se ha registrado en la vacante correctamente.');" class="generic-button">
+              {{ userStore.isLogged() ? (userStore.userType() === 'developer' ? 'Presentar candidatura' : 'No eres un desarrollador') : 'Inicia sesión para aplicar' }}
             </button>
           </div>
         </div>
