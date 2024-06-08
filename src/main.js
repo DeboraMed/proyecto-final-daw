@@ -11,11 +11,12 @@ import {
     faPenToSquare,
     faRightFromBracket,
     faStar,
-    faXmark
+    faXmark,
+    faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
-library.add(faHeart, faXmark, faPenToSquare, faPalette, faStar, faRightFromBracket);
+library.add(faHeart, faXmark, faPenToSquare, faPalette, faStar, faRightFromBracket, faTrash);
 
 const pinia = createPinia()
 

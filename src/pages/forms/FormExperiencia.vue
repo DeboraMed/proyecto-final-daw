@@ -41,13 +41,9 @@ const addExperience = async () => {
     headers: {Authorization: `Bearer ${userStore.token}`}
   };
   try {
-    // Convertir las tecnologías seleccionadas en el formato requerido
     const technologiesArray = newExperience.value.technologies.map((tech) => ({
       name: tech
     }));
-
-    console.log(newExperience.value.technologies);
-    console.log(technologiesArray);
 
     const response = await axios.post('/api/v1/experiences/', {
       ...newExperience.value,
@@ -55,7 +51,6 @@ const addExperience = async () => {
     }, config);
 
     experiences.value.push(response.data.experience);
-    // Reiniciar el formulario
     newExperience.value = {
       level: '',
       company_name: '',
@@ -64,10 +59,22 @@ const addExperience = async () => {
       description: '',
       technologies: []
     };
-    // Ocultar el formulario después de agregar la experiencia
     showForm.value = false;
   } catch (error) {
     console.error('Error al agregar la experiencia:', error);
+  }
+};
+
+// Función para eliminar una experiencia laboral
+const deleteExperience = async (id) => {
+  const config = {
+    headers: { Authorization: `Bearer ${userStore.token}` }
+  };
+  try {
+    await axios.delete(`/api/v1/experiences/${id}`, config);
+    experiences.value = experiences.value.filter(exp => exp.id !== id);
+  } catch (error) {
+    console.error('Error al eliminar la experiencia:', error);
   }
 };
 
@@ -137,7 +144,9 @@ onMounted(() => {
         <div class="experience-info">
           <div class="experience-header">
             <h2>{{experience.level}} en <i>{{experience.company_name}}</i></h2>
-            <p class="experience-date">{{experience.start_date_formatted}} - {{experience.end_date_formatted}}</p>
+            <p class="experience-date">{{experience.start_date_formatted}} - {{experience.end_date_formatted}}
+            <button class="delete-button" @click="deleteExperience(experience.id)"><font-awesome-icon :icon="['fas', 'trash']"/></button>
+            </p>
           </div>
           <p>{{experience.description}}</p>
           <p><strong>Tecnologías:</strong>
@@ -263,5 +272,17 @@ h2 {
 
 .new-experience-form button:hover {
   background-color: #45a049;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #c00;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.delete-button:hover {
+  color: #f00;
 }
 </style>
