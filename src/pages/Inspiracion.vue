@@ -1,32 +1,56 @@
 <script setup>
-
-import {onMounted, ref} from "vue";
+import { onMounted, ref, onBeforeUnmount } from "vue";
 import axios from "axios";
 
 let developers = ref([]);
 let visibleDevelopers = ref([]);
-
+let page = ref(1);
+let hasMoreDevelopers = ref(true);
+let isLoading = ref(false);
 
 const fetchDevelopers = async () => {
+  if (isLoading.value || !hasMoreDevelopers.value) return;
+
+  isLoading.value = true;
   try {
-    const response = await axios.get('/api/v1/developer/random');
-    developers.value = response.data.developers;
-    showDevelopersWithDelay();
+    const response = await axios.get(`/api/v1/developer/random?page=${page.value}`);
+    console.log(response.data.developers.data)
+    if (response.data.developers.data.length === 0) {
+      hasMoreDevelopers.value = false;
+    } else {
+      developers.value.push(...response.data.developers.data);
+      showDevelopersWithDelay(response.data.developers.data);
+      page.value += 1;
+    }
   } catch (error) {
     console.error('Error al recuperar los desarrolladores:', error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
-const showDevelopersWithDelay = () => {
-  developers.value.forEach((developer, index) => {
+const showDevelopersWithDelay = (newDevelopers) => {
+  newDevelopers.forEach((developer, index) => {
     setTimeout(() => {
       visibleDevelopers.value.push(developer);
     }, index * 100); // Retraso de 100ms entre cada aparición
   });
 };
 
+const handleScroll = () => {
+  const bottomOfWindow = window.innerHeight + window.scrollY >= document.documentElement.offsetHeight - 10;
+  if (bottomOfWindow) {
+    fetchDevelopers();
+  }
+};
+
 onMounted(() => {
   fetchDevelopers();
+  window.addEventListener('scroll', handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
 });
 </script>
 
@@ -39,7 +63,7 @@ onMounted(() => {
     <div class="container__div">
       <div class="developers-section">
         <transition-group name="fade" tag="div">
-          <div v-if="developers.length === 0">
+          <div v-if="developers.length === 0 && !isLoading">
             No se encontraron desarrolladores que coincidan con los filtros seleccionados.
           </div>
           <div v-else v-for="developer in visibleDevelopers" :key="developer.id" class="developer">
@@ -58,6 +82,9 @@ onMounted(() => {
             </div>
           </div>
         </transition-group>
+        <div v-if="isLoading" class="loading">
+          Cargando más desarrolladores...
+        </div>
       </div>
     </div>
   </main>
@@ -140,5 +167,12 @@ h2 {
 
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+  padding: 20px;
 }
 </style>
