@@ -52,6 +52,10 @@ const routes = [
         component: () => import('../pages/Match.vue')
     },
     {
+        path: '/contacto',
+        component: () => import('../pages/Contacto.vue')
+    },
+    {
         path: '/:pathMach(.*)*',
         component: () => import('../pages/404.vue')
     },

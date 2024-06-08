@@ -22,6 +22,7 @@ body {
 #app {
     max-width: 100vh;
     margin: 0 auto;
+    padding-bottom: 3rem;
 }
 
 /* Estilo de la APP */

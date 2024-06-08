@@ -77,6 +77,7 @@ const toggleFilter = (category, value) => {
     <div class="container__div">
       <div class="filter-menu">
         <h2>Filtros</h2>
+        <p style="font-weight: lighter">Dale a la X para borrar un filtro.</p>
         <!-- Comienzo de filtros-->
         <div class="filter-category">
           <h4 @click="toggleCategory('specialization')" class="toggle-category">
@@ -145,7 +146,7 @@ const toggleFilter = (category, value) => {
       <!-- Empieza la lista de desarrolladores -->
       <div class="developers-section">
         <transition-group name="fade" tag="div">
-          <div v-if="developers.length === 0">
+          <div  class="developer" v-if="developers.length === 0">
             No se encontraron desarrolladores que coincidan con los filtros seleccionados.
           </div>
           <div v-else v-for="developer in developers" :key="developer.id" class="developer">

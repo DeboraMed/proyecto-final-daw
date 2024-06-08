@@ -1,6 +1,7 @@
 <script setup>
 import {useThemeStore} from '../stores/ThemeStore';
 import {useUserStore} from "../stores/UserStore.js";
+import authGuard from "../router/guard.js";
 
 const themeStore = useThemeStore();
 const userStore = useUserStore();
@@ -47,29 +48,35 @@ export default {
       </router-link>
       <!-- Menu normal-->
       <div v-if="!windowSmall" class="navbar__content">
-        <router-link class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
-        <router-link class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
-        <router-link class="nav__router__pri" to="/empleo">Empleo</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/encuentra">Encuentra desarrolladores</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/inspiracion">Inspiración</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/empleo">Empleo</router-link>
         <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='company'"
-                     class="nav__router__pri" to="/recluta">Recluta
+                     class="nav__router__pri" to="/recluta"
+                     :before-enter="authGuard">Recluta
         </router-link>
         <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
-                     class="nav__router__pri" to="/match">Match
+                     class="nav__router__pri" to="/match"
+                     :before-enter="authGuard">Match
         </router-link>
         <div class="nav__router__pri__button">
-          <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/login">
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/login"
+                       :before-enter="authGuard">
             <button class="navbar__button">Inicia Sesión</button>
           </router-link>
-          <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/registro">
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" to="/registro"
+                       :before-enter="authGuard">
             <button class="navbar__button">Regístrate</button>
           </router-link>
         </div>
         <!-- Parte de usuario logueado -->
         <div class="navbar__content">
           <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='developer'"
-                       class="nav__router__pri" to="/portfolio">Portfolio
+                       class="nav__router__pri" to="/portfolio"
+                       :before-enter="authGuard">Portfolio
           </router-link>
-          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil"
+                       :before-enter="authGuard">Perfil
           </router-link>
           <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/"
                        @click="userStore.logout()">Salir
@@ -81,9 +88,9 @@ export default {
       <ul v-else class="burger__menu">
         <li v-if="openBurguerMenu" class="burger__menu__items">
           <button v-show="isMenuOpen" class="navbar__toggle" @click="toggleMenu">☰</button>
-          <router-link class="nav__router" to="/encuentra">Encuentra desarrolladores</router-link>
-          <router-link class="nav__router" to="/inspiracion">Inspiración</router-link>
-          <router-link class="nav__router" to="/empleo">Empleo</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/encuentra">Encuentra desarrolladores</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/inspiracion">Inspiración</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/empleo">Empleo</router-link>
           <router-link v-show="!isMenuOpen && userStore.isLogged() && userStore.userType() ==='company'"
                        class="nav__router__pri" to="/recluta">Recluta
           </router-link>

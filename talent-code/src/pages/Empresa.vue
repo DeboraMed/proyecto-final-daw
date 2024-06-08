@@ -33,6 +33,7 @@ onMounted(() => {
     </section>
     <section v-if="company">
       <div class="profile-container">
+      <!-- perfil empresa-->
         <div class="profile-header">
           <img :src="company.user['avatar_url']" alt="Avatar de la empresa" class="avatar">
           <div class="profile-info">
@@ -40,12 +41,13 @@ onMounted(() => {
             <p>{{ company.user['description'] }}</p>
             <p>{{ company.user['phone'] }}</p>
             <p>{{ company.user['address'] }}</p>
-            <a :href="company.user['email']" target="_blank" class="github-link">{{company.user['email']}}</a>
+            <p class="github-link">{{company.user['email']}}</p>
+<!--        <a :href="company.user['email']" target="#" @click="" class="github-link">{{company.user['email']}}</a>-->
           </div>
         </div>
+        <!-- Vacantes de la empresa -->
         <div class="vacancies-section">
           <h2>Vacantes</h2>
-
           <div v-for="vacancy in company.vacancies" :key="vacancy.id" class="vacancy">
             <div class="vacancy-info">
               <h2>{{vacancy.title}}</h2>
@@ -124,7 +126,7 @@ h2 {
   margin-top: 10px;
   padding: 10px 20px;
   background-color: #333;
-  color: #fff;
+  color: #fff!important;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
