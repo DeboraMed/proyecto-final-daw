@@ -7,7 +7,7 @@ let developers = ref([]);
 const fetchDevelopers = async () => {
   try {
     const response = await axios.get('/api/v1/developer/random');
-    developers.value = response.data.developers;
+    developers.value = response.data.developers.data;
   } catch (error) {
     console.error('Error al recuperar los desarrolladores:', error);
   }
