@@ -100,7 +100,7 @@ export const useSelectStore = defineStore( 'select', {
                     });
             }
         },
-        async fetchSelectTechnologyOptions() {
+        async fetchSelectTechnologyTypeOptions() {
             if (!this.technologySelectData) {
                 await axios.get('/api/v1/technology-type')
                     .then(response => {
@@ -119,9 +119,9 @@ export const useSelectStore = defineStore( 'select', {
             if (!this.technologiesSelectData) {
                 await axios.get('/api/v1/technologies')
                     .then(response => {
-                        this.technologiesSelectData = Object.entries(response.data).map(([value, label]) => ({
-                            value,
-                            label
+                        this.technologiesSelectData = response.data.technologies.map((tech, index) => ({
+                            value: tech.name,
+                            label: `${tech.name} (${tech.type})`
                         }));
                         localStorage.setItem('technologiesSelectData', JSON.stringify(this.technologiesSelectData));
                     })
@@ -137,7 +137,7 @@ export const useSelectStore = defineStore( 'select', {
             await this.fetchSelectWorkOptions();
             await this.fetchSelectAcademicOptions();
             await this.fetchSelectExperienceOptions();
-            await this.fetchSelectTechnologyOptions();
+            await this.fetchSelectTechnologyTypeOptions();
             await this.fetchSelectTechnologiesOptions();
         },
     }

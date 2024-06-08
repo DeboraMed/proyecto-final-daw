@@ -58,7 +58,7 @@ export default {
     await this.selectStore.fetchSelectExperienceOptions();
     this.selectExperienceOptions = this.selectStore.experienceSelectData;
     // tipos de tecnologias
-    await this.selectStore.fetchSelectTechnologyOptions();
+    await this.selectStore.fetchSelectTechnologyTypeOptions();
     this.selectTechnologyOptions = this.selectStore.technologySelectData;
     // listado de tecnologias
     await this.selectStore.fetchSelectTechnologiesOptions();
