@@ -23,7 +23,7 @@ const fetchDeveloper = async (userId) => {
 
   if(!userId) {
     await userStore.fetchUser();
-    userId = userStore.userData.id;
+    userId = userStore.userData.userable.id;
   }
 
   try {
@@ -53,11 +53,15 @@ onMounted(() => {
           <div class="profile-info">
             <h1>{{developer.user['name']}}</h1>
             <p>{{developer.user['description']}}</p>
-            <a :href="developer.github_url" target="_blank" class="github-link">GitHub</a>
+            <a v-if="developer.github_url" :href="developer.github_url" target="_blank" class="github-link">GitHub</a>
           </div>
         </div>
         <div class="projects-section">
           <h2>Proyectos</h2>
+
+          <div class="profile-info" v-if="developer.projects.length===0">
+            <p>¡Aun no tienes ningún proyecto! Ve a la sección "Perfil" para aportar más información.</p>
+          </div>
 
           <div v-for="project in developer.projects" :key="project.id" class="project">
             <div class="project-content-image">
