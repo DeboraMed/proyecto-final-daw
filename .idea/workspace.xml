@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: DarkMode ajustes de botones y filtrado">
-      <change afterPath="$PROJECT_DIR$/talent-code/src/pages/Contacto.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/talent-code/src/router/guard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/talent-code/src/shared/Footer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/talent-code/src/shared/ScrollToTop.vue" afterDir="false" />
+    <list default="true" id="2679e3d7-8946-40b4-8b3b-4c2dc66c964a" name="Changes" comment="feat: ScrollToTop, guardas, formulario de contacto , footer y fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Empresa.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Empresa.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Encuentra.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Registro.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/router/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/shared/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talent-code/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/talent-code/src/pages/Empleo.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +94,7 @@
       <workItem from="1715851666607" duration="46581000" />
       <workItem from="1717430511697" duration="573000" />
       <workItem from="1717434110666" duration="5172000" />
-      <workItem from="1717604897576" duration="31140000" />
+      <workItem from="1717604897576" duration="32785000" />
     </task>
     <task id="LOCAL-00001" summary="Actualizando el README">
       <option name="closed" value="true" />
@@ -234,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717788806791</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat: ScrollToTop, guardas, formulario de contacto , footer y fixes">
+      <option name="closed" value="true" />
+      <created>1717847969597</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1717847969597</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +265,7 @@
     <MESSAGE value="feat: Añadidos botones y pulido de estilos" />
     <MESSAGE value="fix: Ajustes css y DarkMode" />
     <MESSAGE value="feat: DarkMode ajustes de botones y filtrado" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: DarkMode ajustes de botones y filtrado" />
+    <MESSAGE value="feat: ScrollToTop, guardas, formulario de contacto , footer y fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: ScrollToTop, guardas, formulario de contacto , footer y fixes" />
   </component>
 </project>
