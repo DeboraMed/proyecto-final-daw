@@ -11,19 +11,25 @@ const alertStore = useAlertStore();
 const selectStore = useSelectStore();
 
 let expandedCategories = ref({
-  specialization: true,
+  academic_level: true,
   schedule: true,
   work_mode: true,
   contract_type: true,
 });
 
 const toggleCategory = (category) => {
-  expandedCategories.value[category] = !expandedCategories.value[category];
+  if(expandedCategories.value[category]) {
+    expandedCategories.value[category] = false;
+    filters.value[category] = '';
+    fetchVacancies();
+  }
+  else
+    expandedCategories.value[category] = true
 };
-//TODO: voy por aqui con los filtros
+
 let vacancies = ref([]);
 let filters = ref({
-  specialization: '',
+  academic_level: '',
   schedule: '',
   work_mode: '',
   contract_type: '',
@@ -31,7 +37,24 @@ let filters = ref({
 
 const fetchVacancies = async () => {
   try {
-    const response = await axios.get('/api/v1/vacancies/random');
+    const params = new URLSearchParams();
+
+    if (filters.value.academic_level) {
+      params.append('academic_level', filters.value.academic_level);
+    }
+    if (filters.value.schedule) {
+      params.append('schedule', filters.value.schedule);
+    }
+    if (filters.value.work_mode) {
+      params.append('work_mode', filters.value.work_mode);
+    }
+    if (filters.value.contract_type) {
+      params.append('contract_type', filters.value.contract_type);
+    }
+
+    const queryString = params.toString();
+    const response = await axios.get(`/api/v1/vacancies/query?${queryString}`);
+
     vacancies.value = response.data.vacancies;
   } catch (error) {
     console.error('Error al recuperar las vacantes:', error);
@@ -41,7 +64,13 @@ const fetchVacancies = async () => {
 // Usar el hook onMounted para llamar a la función cuando el componente se monte
 onMounted(() => {
   fetchVacancies();
+  selectStore.fetchAllSelectOptionsEnums()
 });
+
+const toggleFilter = (category, value) => {
+  filters.value[category] = value;
+  fetchVacancies();
+};
 </script>
 
 <template>
@@ -57,15 +86,15 @@ onMounted(() => {
         <p style="font-weight: lighter">Dale a la X para borrar un filtro.</p>
         <!-- Comienzo de filtros-->
         <div class="filter-category">
-          <h4 @click="toggleCategory('specialization')" class="toggle-category">
+          <h4 @click="toggleCategory('academic_level')" class="toggle-category">
             <font-awesome-icon :icon="['fas', 'xmark']"/>
             Especialización
           </h4>
           <transition name="fade">
-            <div v-if="expandedCategories.specialization">
-              <label v-for="option in selectStore.specializationSelectData" :key="option.value">
-                <input type="radio" :name="`specialization`" :value="option.value"
-                       @change="toggleFilter('specialization', option.value)">
+            <div v-if="expandedCategories.academic_level">
+              <label v-for="option in selectStore.academicSelectData" :key="option.value">
+                <input type="radio" :name="`academic_level`" :value="option.value"
+                       @change="toggleFilter('academic_level', option.value)">
                 {{ option.label }}
               </label>
             </div>
