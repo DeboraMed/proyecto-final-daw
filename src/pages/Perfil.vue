@@ -81,11 +81,21 @@ export default {
   <main>
     <section class="container__form">
       <article class="article__form" v-if="userData">
-        <h1>Bienvenid@ <span>{{ userData.name }}</span></h1>
-        Hola, {{ userData.name }} Bienvenido a Talent.Code<br>
-        Tu email: {{ userData.email }}<br>
-        <button class="button" @click="userStore.logout()">Cerrar sesión</button>
+        <div class="profile-container">
+          <div class="profile-header">
+            <img :src="userStore.userData.avatar_url" alt="Avatar de la empresa" class="avatar">
+            <div class="profile-info">
+              <h1>Bienvenid@ {{ userStore.userData.name }}</h1>
+              <p>{{ userStore.userData.description }}</p>
+              <p>Teléfono: {{ userStore.userData.phone }}</p>
+              <p>email: {{ userStore.userData.email }}</p>
+              <p>{{ userStore.userData.address }}</p>
+              <button class="button" @click="userStore.logout()">Cerrar sesión</button>
+            </div>
+          </div>
+        </div>
       </article>
+
       <div v-if="userStore.user_type==='developer'">
         <div class="tabs">
           <!-- Primera tab-->
@@ -325,5 +335,62 @@ select:focus {
 
 .tabs .tab-2:last-child [type="radio"]:checked + div {
   margin-left: -100%;
+}
+
+.profile-container {
+  width: 90%;
+  max-width: 1200px;
+  background-color: #fff;
+  padding: 20px;
+  //border: #ccc solid 1px;
+  //box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1px;
+  text-align: left;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.profile-info {
+  margin-top: 1rem;
+  flex: 1;
+  text-align: left;
+}
+
+.profile-info h1 {
+  margin: 0 0 10px;
+  font-size: 2em;
+  color: #333;
+}
+
+.profile-info p {
+  margin: 0 0 10px;
+  color: #666;
+}
+
+.github-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff!important;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.github-link:hover {
+  background-color: #555;
 }
 </style>
