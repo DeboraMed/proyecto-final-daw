@@ -19,7 +19,6 @@ export default {
   },
   data() {
     return {
-      perfilPendiente: true,
       userData: null,
       /* Info que carga en los select */
       /* Payload de edicion TODO: manejar la edicion de la info base del perfil */
@@ -87,7 +86,7 @@ export default {
         Tu email: {{ userData.email }}<br>
         <button class="button" @click="userStore.logout()">Cerrar sesión</button>
       </article>
-      <div v-if="perfilPendiente">
+      <div v-if="userStore.user_type==='developer'">
         <div class="tabs">
           <!-- Primera tab-->
           <div class="tab-2">
