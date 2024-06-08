@@ -57,7 +57,7 @@ export const useUserStore = defineStore('user', {
             };
             let json = {
                 "name": user.name,
-                "description": user.email,
+                "description": user.description,
                 "phone": user.phone,
                 "address": user.address,
                 "userable": user.userable,

@@ -4,9 +4,10 @@ import {useUserStore} from '../stores/UserStore.js';
 import {useSelectStore} from "../stores/SelectStore.js";
 import FormFormacion from "./forms/FormFormacion.vue";
 import FormExperiencia from "./forms/FormExperiencia.vue";
+import FormProyectos from "./forms/FormProyectos.vue";
 
 export default {
-  components: {FormFormacion,FormExperiencia},
+  components: {FormProyectos, FormFormacion,FormExperiencia},
   setup() {
     const selectStore = useSelectStore();
     const userStore = useUserStore();
@@ -21,18 +22,6 @@ export default {
       perfilPendiente: true,
       userData: null,
       /* Info que carga en los select */
-      developer: {
-        specialization: '',
-        schedule: '',
-        work_mode: '',
-        contract_type: '',
-        github_url: '',
-        academic_level: '',
-        experience_level: '',
-        technology_type: '',
-        technologies: '',
-
-      },
       /* Payload de edicion TODO: manejar la edicion de la info base del perfil */
       user: {
         /*  name: '',
@@ -48,7 +37,7 @@ export default {
           schedule: '',
           work_mode: '',
           contract_type: '',
-          github_url: '',
+          //github_url: '',
         }
       },
       errors: {},
@@ -102,12 +91,39 @@ export default {
         <div class="tabs">
           <!-- Primera tab-->
           <div class="tab-2">
-            <label for="tab2-1">Formulario de preferencias laborales</label>
+            <label for="tab2-1">Información Personal</label>
             <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
             <div v-if="userData && userData.userable">
               <form class="form__perfil" @submit.prevent="validateForm">
+
+                <h2>Detalle de Perfil</h2>
+
+                <p>Descripción de Perfil</p>
+                <input type="text"
+                       id="description"
+                       v-model="userData.description"
+                       placeholder="Descripción"/>
+
+                <p>Teléfono</p>
+                <input type="text"
+                       id="phone"
+                       v-model="userData.phone"
+                       placeholder="Teléfono"/>
+
+                <p>Dirección física</p>
+                <input type="text"
+                       id="address"
+                       v-model="userData.address"
+                       placeholder="Dirección"/>
+
+                <p>Perfil Publico de Github</p>
+                <input type="url"
+                       id="github"
+                       v-model="userData.userable['github_url']"
+                       placeholder="Github URL"/>
+
                 <h2>Formulario de preferencias laborales</h2>
-                <legend> Selecciona tus preferencias Laborales</legend>
+                <!--<legend> Selecciona tus preferencias Laborales</legend>-->
                 <p>Tipo de contrato</p>
                 <select class="home__select"
                         v-model="userData.userable['contract_type']">
@@ -160,66 +176,16 @@ export default {
               </form>
             </div>
           </div>
-
           <!-- Segunda tab-->
           <div class="tab-2">
-            <label for="tab2-2">Formulario de preferencias personales</label>
+            <label for="tab2-2">Historial Academico / Profesional</label>
             <input id="tab2-2" name="tabs-two" type="radio">
             <div>
-<!--              <form class="form__perfil" @submit.prevent="validateForm">
-                <h2>Formulario de preferencias personales</h2>
-                <legend> Selecciona tus preferencias personales</legend>
-                <p>Nivel académico (campo que estara el formulario de Formacion)</p>
-                <select class="home__select" v-model="developer.academic_level">
-                  <option class="home__select__option" disabled value="">Selecciona un nivel académico</option>
-                  <option class="home__select__option"
-                          id="estudios"
-                          v-for="option in selectAcademicOptions"
-                          :key="option.value"
-                          :value="option.value">{{ option.label }}
-                  </option>
-                </select>
-                <p>Experiencia Laboral (campo que estara el formulario de Experiencia Laboral)</p>
-                <select class="home__select" v-model="developer.experience_level">
-                  <option class="home__select__option" disabled value="">Selecciona un nivel de experiencia</option>
-                  <option class="home__select__option"
-                          id="experiencia"
-                          v-for="option in selectExperienceOptions"
-                          :key="option.value"
-                          :value="option.value">{{ option.label }}
-                  </option>
-                </select>
-                <p>Tecnologias (campo que estara el formulario de Proyectos)</p>
-                <select class="home__select" v-model="developer.technology_type">
-                  <option class="home__select__option" disabled value="">Selecciona un tipo de tecnología</option>
-                  <option class="home__select__option"
-                          id="tipo-tecnologias"
-                          v-for="option in selectTechnologyOptions"
-                          :key="option.value"
-                          :value="option.value">{{ option.label }}
-                  </option>
-                </select>
-                <select class="home__select"
-                        v-model="developer.technologies"
-                        :disabled="!developer.technology_type">
-                  <option class="home__select__option" disabled value="">Selecciona una tecnología</option>
-                  <option class="home__select__option"
-                          id="tecnologias"
-                          v-for="option in selectTechnologiesOptions"
-                          :key="option.value"
-                          :value="option.value">{{ option.label }}
-                  </option>
-                </select>
-                <input type="url"
-                       id="github"
-                       v-model="developer.github_url"
-                       placeholder="Github URL"/>
-                <button type="submit" class="form__button">Añadir preferencias personales</button>
-              </form>-->
               <form-formacion></form-formacion>
+              <form-experiencia></form-experiencia>
+              <form-proyectos></form-proyectos>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -295,7 +261,6 @@ select:focus {
   font-size: 1.5em;
   font-weight: 300;
   line-height: 1em;
-  padding: 2rem 0;
   text-align: center;
 }
 
