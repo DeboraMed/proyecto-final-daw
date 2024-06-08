@@ -13,7 +13,13 @@ let expandedCategories = ref({
 });
 
 const toggleCategory = (category) => {
-  expandedCategories.value[category] = !expandedCategories.value[category];
+  if(expandedCategories.value[category]) {
+    expandedCategories.value[category] = false;
+    filters.value[category] = '';
+    fetchDevelopers();
+  }
+  else
+    expandedCategories.value[category] = true
 };
 
 let developers = ref([]);
