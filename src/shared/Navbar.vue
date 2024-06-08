@@ -164,7 +164,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  border: solid 1px #cccccc;
+  border-bottom: solid 1px #cccccc;
   padding: 1rem 1rem;
   margin: 0 auto;
   transition: background 0.5s ease, color 0.5s ease;
