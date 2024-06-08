@@ -79,7 +79,6 @@ export default {
       <div>
         <h2>Formulario de registro </h2>
         <form class="form" @submit.prevent="validateForm">
-
           <fieldset>
             <legend>Datos de registro</legend>
             <label for="nombre">Nombre</label>

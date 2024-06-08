@@ -42,7 +42,7 @@ export default {
   right: 20px;
   width: 60px;
   height: 60px;
-  background-color: #333;
+  background-color: #656565;
   color: white;
   border-radius: 10%;
   display: flex;

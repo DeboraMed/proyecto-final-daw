@@ -49,6 +49,7 @@ onMounted(() => {
             <div class="vacancy-info">
               <h2>{{ jobmatch.vacancy.title }}</h2>
               <p>{{ jobmatch.vacancy.description }}</p>
+              <div style="padding-top: 0.5rem">
               <p><strong>Tecnologías:</strong>
                 <span v-for="technology in jobmatch.vacancy.technologies" :key="technology.name"
                       class="vacancy-info-tecnologias">
@@ -60,6 +61,7 @@ onMounted(() => {
                 <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.work_mode }}</span>
                 <span class="vacancy-info-tecnologias">{{ jobmatch.vacancy.schedule }}</span>
               </p>
+              </div>
               <div class="button-container">
                 <button v-if="userStore.isLogged() && userStore.userType() ==='developer'" @click="alertStore.success('Se ha registrado en la vacante correctamente.');" class="generic-button">
                   Presentar candidatura
@@ -80,6 +82,10 @@ p {
 
 h2 {
   margin-top: 10px;
+}
+
+.button-container {
+  padding: 0;
 }
 
 .profile-info h1 {
@@ -156,10 +162,11 @@ h2 {
 }
 
 .vacancy-info-tecnologias {
+  line-height:normal ;
   background-color: #c0c0c0;
   border-radius: 30px;
   padding: 5px 10px;
-  margin: 5px;
+  margin: 5px 8px;
 }
 
 .highlight {
@@ -173,7 +180,6 @@ h2 {
 
 .highlight p {
   margin: 0;
-  font-size: 18px;
   color: darkolivegreen;
   padding: 0;
 }

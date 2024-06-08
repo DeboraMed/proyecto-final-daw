@@ -165,7 +165,7 @@ export default {
   flex-wrap: nowrap;
   flex-direction: row;
   border-bottom: solid 1px #cccccc;
-  padding: 1rem 1rem;
+  padding: 0.5rem 0.5rem;
   margin: 0 auto;
   transition: background 0.5s ease, color 0.5s ease;
 }
@@ -186,7 +186,6 @@ export default {
 }
 
 .nav__logo {
-  margin-top: 0.5rem;
   margin-right: 1rem;
   animation: palpito 2s ease 0s 1 normal forwards;
 }
@@ -201,7 +200,6 @@ export default {
 .nav__router__pri__button {
   padding: 0.8rem 0.8rem;
   align-items: center;
-
 }
 
 a {
@@ -215,6 +213,7 @@ a:hover {
 .navbar__button {
   margin-right: 1rem;
 }
+
 
 img {
   height: 4rem;

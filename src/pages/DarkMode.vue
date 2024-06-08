@@ -41,7 +41,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
 
   --font-color-p-error: #f18465;
 
-  --a-color: #a6a6a6;
+  --a-color: #e8e8e8;
   --a-color-hover: #5aad8d;
 
   --bt-color-1: #ffffff;

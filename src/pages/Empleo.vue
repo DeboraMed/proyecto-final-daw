@@ -169,14 +169,16 @@ input {
   padding: 0;
   margin: 0;
 }
-
+.button-container {
+  padding: 0;
+}
 .container__div {
   display: flex;
 }
 
 .filter-menu {
   text-align: left;
-  width: 250px;
+  width: 450px;
   margin-right: 20px;
 }
 
@@ -191,6 +193,9 @@ h2 {
   margin-top: 10px;
 }
 
+button {
+  margin: 0;
+}
 .profile-info h1 {
   margin: 0 0 10px;
   font-size: 2em;
@@ -223,9 +228,8 @@ h2 {
 .company-content-image {
   position: relative;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .company-name {
