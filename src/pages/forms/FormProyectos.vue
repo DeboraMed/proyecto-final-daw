@@ -1,9 +1,7 @@
 <script setup>
-
 import {useUserStore} from "../../stores/UserStore.js";
 import {useSelectStore} from "../../stores/SelectStore.js";
 import {useAlertStore} from "../../stores/AlertStore.js";
-
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
@@ -21,14 +19,15 @@ let newProject = ref({
 });
 
 let showForm = ref(false);
+let errors = ref({});
 
 // Función para obtener los proyectos del usuario
 const fetchProjects = async () => {
   const config = {
     headers: {Authorization: `Bearer ${userStore.token}`}
   };
-    try {
-    const response = await axios.get('/api/v1/projects/',config);
+  try {
+    const response = await axios.get('/api/v1/projects/', config);
     projects.value = response.data.projects;
   } catch (error) {
     console.error('Error al recuperar los proyectos:', error);
@@ -37,12 +36,45 @@ const fetchProjects = async () => {
 };
 
 const handleFileUpload = (event) => {
-  newProject.value.img_url = event.target.files[0];
+  const file = event.target.files[0];
+  const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  if (file && validTypes.includes(file.type)) {
+    newProject.value.img_url = file;
+    errors.value.img_url = ''; // Limpiar error de imagen si el archivo es válido
+  } else {
+    errors.value.img_url = 'Solo se permiten archivos JPG, JPEG, PNG, y GIF.';
+  }
+};
+
+const validateProjectForm = () => {
+  errors.value = {};
+
+  if (!newProject.value.title) {
+    errors.value.title = 'Por favor, introduce un título.';
+  }
+  if (!newProject.value.description) {
+    errors.value.description = 'Por favor, introduce una descripción.';
+  }
+  if (!newProject.value.img_url) {
+    errors.value.img_url = 'Por favor, selecciona una imagen.';
+  }
+  if (!newProject.value.technologies || newProject.value.technologies.length === 0) {
+    errors.value.technologies = 'Por favor, introduce al menos una tecnología.';
+  }
+
+  return Object.keys(errors.value).length === 0;
 };
 
 const addProject = async () => {
+  if (!validateProjectForm()) {
+    return;
+  }
+
   const config = {
-    headers: {Authorization: `Bearer ${userStore.token}`, 'Content-Type': 'multipart/form-data'}
+    headers: {
+      Authorization: `Bearer ${userStore.token}`,
+      'Content-Type': 'multipart/form-data'
+    }
   };
   try {
     const technologiesArray = newProject.value.technologies.map((tech) => ({
@@ -54,7 +86,7 @@ const addProject = async () => {
     formData.append('project_data', JSON.stringify({
       title: newProject.value.title,
       description: newProject.value.description,
-      technologies: technologiesArray,
+      technologies: technologiesArray
     }));
 
     const response = await axios.post('/api/v1/projects/', formData, config);
@@ -64,10 +96,12 @@ const addProject = async () => {
     newProject.value = {
       title: '',
       description: '',
+      img_url: '',
       technologies: []
     };
 
     showForm.value = false;
+    alertStore.success('El proyecto se ha agregado correctamente.');
   } catch (error) {
     console.error('Error al agregar el proyecto:', error);
     alertStore.error('Error al agregar el proyecto.');
@@ -76,11 +110,12 @@ const addProject = async () => {
 
 const deleteProject = async (id) => {
   const config = {
-    headers: { Authorization: `Bearer ${userStore.token}` }
+    headers: {Authorization: `Bearer ${userStore.token}`}
   };
   try {
     await axios.delete(`/api/v1/projects/${id}`, config);
     projects.value = projects.value.filter(project => project.id !== id);
+    alertStore.success('El proyecto se ha eliminado correctamente.');
   } catch (error) {
     console.error('Error al eliminar el proyecto:', error);
     alertStore.error('Error al eliminar el proyecto.');
@@ -92,82 +127,156 @@ onMounted(() => {
   fetchProjects();
   selectStore.fetchAllSelectOptionsEnums();
 });
-
 </script>
 
 <template>
+  <section>
+    <h2>Proyectos</h2>
+    <!-- Botón para mostrar el formulario -->
+    <button @click="showForm = true" v-if="!showForm">Agregar Proyecto</button>
+    <!-- Formulario para agregar nuevo proyecto, visible solo cuando showForm es true -->
+    <div class="container__form" v-if="showForm">
+      <h3>Agregar Nuevo Proyecto</h3>
+      <form class="form" @submit.prevent="addProject">
+        <label>Título:</label>
+        <input
+            v-model="newProject.title"
+            type="text"/>
+        <p class="error" v-if="errors.title">{{ errors.title }}</p>
 
-    <section>
-      <h2>Proyectos</h2>
+        <label>Descripción:</label>
+        <input
+            v-model="newProject.description"
+            type="text"/>
+        <p class="error" v-if="errors.description">{{ errors.description }}</p>
 
-      <!-- Botón para mostrar el formulario -->
-      <button @click="showForm = true" v-if="!showForm">Agregar Proyecto</button>
+        <label>Tecnologías:</label>
+        <p class="detail"> Añade más de una tecnología a la vez pulsando la tecla Ctrl</p>
+        <select v-model="newProject.technologies" multiple>
+          <option
+              v-for="option in selectStore.technologiesSelectData"
+              :key="option.value"
+              :value="option.value">{{ option.label }}
+          </option>
+        </select>
+        <p class="error" v-if="errors.technologies">{{ errors.technologies }}</p>
 
-      <!-- Formulario para agregar nueva experiencia, visible solo cuando showForm es true -->
-      <div class="new-project-form" v-if="showForm">
-        <h3>Agregar Nuevo Proyecto</h3>
-        <form @submit.prevent="addProject">
-          <label>
-            Título:
-            <input v-model="newProject.title" type="text" required/>
-          </label>
-          <label>
-            Descripción:
-            <input v-model="newProject.description" type="text" required/>
-          </label>
-          <label>
-            Tecnologías:
-            <select v-model="newProject.technologies" multiple>
-              <option
-                  v-for="option in selectStore.technologiesSelectData"
-                  :key="option.value"
-                  :value="option.value">{{ option.label }}
-              </option>
-            </select>
-          </label>
-          <label>
-            Avatar
-            <input type="file"
-                   id="avatar"
-                   @change="handleFileUpload"/>
-          </label>
-          <button type="submit">Agregar Proyecto</button>
-          <button type="button" @click="showForm = false">Cancelar</button>
-        </form>
-      </div>
+        <label>Avatar:</label>
+        <input type="file"
+               id="avatar"
+               @change="handleFileUpload" required/>
+        <p class="error" v-if="errors.img_url">{{ errors.img_url }}</p>
 
-      <div class="projects-section">
-
-        <div v-for="project in projects.slice().reverse()" :key="project.id" class="project">
-          <div class="project-content-image">
-            <img :src="project.image_url" alt="Imagen del proyecto" class="project-image">
+        <button class="form__button" type="submit">Agregar Proyecto</button>
+        <button class="form__button" type="button" @click="showForm = false">Cancelar</button>
+      </form>
+    </div>
+    <!-- Proyectos -->
+    <div class="projects-section">
+      <div v-for="project in projects.slice().reverse()" :key="project.id" class="project">
+        <div class="project-content-image">
+          <img :src="project.image_url" alt="Imagen del proyecto" class="project-image">
+        </div>
+        <div class="project-info">
+          <div class="project-header">
+            <h2>{{ project.title }}</h2>
+            <button class="delete-button" @click="deleteProject(project.id)">
+              <font-awesome-icon :icon="['fas', 'trash']"/>
+            </button>
           </div>
-
-          <div class="project-info">
-            <div class="project-header">
-              <h2>{{project.title}}</h2>
-              <button class="delete-button" @click="deleteProject(project.id)"><font-awesome-icon :icon="['fas', 'trash']"/></button>
-            </div>
-
-            <p>{{project.description}}</p>
-            <p><strong>Tecnologías:</strong>
-              <span v-for="technology in project.technologies" :key="technology.name" class="project-info-tecnologias">
-                {{technology.name}}
-              </span>
-            </p>
-          </div>
+          <p>{{ project.description }}</p>
+          <p><strong>Tecnologías:</strong>
+            <span v-for="technology in project.technologies" :key="technology.name" class="project-info-tecnologias">
+              {{ technology.name }}
+            </span>
+          </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 </template>
 
 <style scoped>
-p {
-  padding-bottom: 10px;
+.detail {
+  font-weight: lighter;
+  font-size: small;
+}
+
+.container__form {
+  margin: 3rem;
+}
+
+button {
+  margin: 10px;
 }
 
 h2 {
-  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+p {
+  line-height: 1.8;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 20px;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 1rem;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+div > p {
+  font-weight: bold;
+}
+
+div > fieldset {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+div > fieldset > div {
+  display: flex;
+  align-items: center;
 }
 
 .profile-info h1 {
@@ -246,10 +355,6 @@ h2 {
   align-items: center;
 }
 
-.new-project-form {
-  margin-top: 30px;
-}
-
 .new-project-form form {
   display: flex;
   flex-direction: column;
@@ -267,29 +372,11 @@ h2 {
   border: 1px solid #ccc;
 }
 
-.new-project-form button {
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
+.error {
+  color: #e74c3c;
+  font-size: 0.875em;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.new-project-form button:hover {
-  background-color: #45a049;
-}
-
-.delete-button {
-  background: none;
-  border: none;
-  color: #c00;
-  cursor: pointer;
-  font-size: 1.2em;
-}
-
-.delete-button:hover {
-  color: #f00;
-}
 </style>

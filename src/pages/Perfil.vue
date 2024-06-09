@@ -94,10 +94,9 @@ export default {
             <label for="tab2-1">Información Personal</label>
             <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
             <div v-if="userData && userData.userable">
-              <form class="form__perfil" @submit.prevent="validateForm">
+              <form @submit.prevent="validateForm">
                 <h2>Detalle de Perfil</h2>
-
-                <p>Descripción de Perfil</p>
+                <p>Descripción del perfil</p>
                 <textarea type="text"
                           maxlength="300"
                           id="descripcion"
@@ -116,7 +115,7 @@ export default {
                        v-model="userData.address"
                        placeholder="Dirección"/>
                 <p class="error" v-if="errors.address">{{ errors.address }}</p>
-                <p>Perfil Publico de Github</p>
+                <p>Perfil publico de Github</p>
                 <input type="url"
                        id="github"
                        v-model="userData.userable['github_url']"
@@ -207,8 +206,7 @@ button {
 }
 
 .home__select {
-  width: 14.8rem;
-  height: fit-content;
+
   border: 1px #797474;
   border-radius: 0.7rem;
   padding: 0.625rem 0.625rem;
