@@ -60,13 +60,17 @@ export default {
     },
     handleFileUpload(event)  {
       const file = event.target.files[0];
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
       this.user.avatar = event.target.files[0];
-      if (file) {
+      if (file && validTypes.includes(file.type)) {
         const reader = new FileReader();
         reader.onload = (e) => {
           this.avatar_preview = e.target.result;
         };
         reader.readAsDataURL(file);
+        this.errors.avatar = '';
+      } else {
+        this.errors.avatar = 'Solo se permiten archivos JPG, JPEG, PNG, y GIF.'
       }
     }
   }

@@ -1,15 +1,17 @@
 <script setup>
-
 import {useUserStore} from "../stores/UserStore.js";
 import {onMounted, ref, watch} from "vue";
-import axios from "axios";
 import {useRoute} from "vue-router";
-const userStore = useUserStore();
+import ImageModal from "../shared/ImageModal.vue";
+
+import axios from "axios";
 
 // Definir una ref para almacenar los proyectos
 let developer = ref();
-
+const userStore = useUserStore();
 const route = useRoute()
+let showModal = ref(false);
+let selectedImage = ref(null);
 
 // Vigilar si existen cambios en la URL para recargar
 watch(() => route, () => {
@@ -34,12 +36,20 @@ const fetchDeveloper = async (userId) => {
   }
 };
 
+const openImageModal = (imageUrl) => {
+  selectedImage.value = imageUrl;
+  showModal.value = true;
+};
+
+const closeImageModal = () => {
+  showModal.value = false;
+};
+
 // Usar el hook onMounted para llamar a la función cuando el componente se monte
 onMounted(() => {
   const route = useRoute();
   fetchDeveloper(route.params.id);
 });
-
 </script>
 
 <template>
@@ -65,7 +75,7 @@ onMounted(() => {
 
           <div v-for="project in developer.projects" :key="project.id" class="project">
             <div class="project-content-image">
-              <img :src="project.image_url" alt="Imagen del proyecto" class="project-image">
+              <img :src="project.image_url" alt="Imagen del proyecto" class="project-image" @click="openImageModal(project.image_url)">
             </div>
 
             <div class="project-info">
@@ -80,6 +90,8 @@ onMounted(() => {
           </div>
         </div>
       </div>
+      <!-- Uso del componente de modal de imagen -->
+      <ImageModal :show="showModal" :imageUrl="selectedImage" @close="closeImageModal" />
     </section>
   </main>
 </template>

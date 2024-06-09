@@ -1,15 +1,16 @@
 <script setup>
-import {useUserStore} from "../../stores/UserStore.js";
-import {useSelectStore} from "../../stores/SelectStore.js";
-import {useAlertStore} from "../../stores/AlertStore.js";
-import {onMounted, ref} from "vue";
+import { ref, onMounted } from "vue";
+import { useUserStore } from "../../stores/UserStore.js";
+import { useSelectStore } from "../../stores/SelectStore.js";
+import { useAlertStore } from "../../stores/AlertStore.js";
+import ImageModal from "../../shared/ImageModal.vue";
+
 import axios from "axios";
 
 const userStore = useUserStore();
 const selectStore = useSelectStore();
 const alertStore = useAlertStore();
 
-// Definir una ref para almacenar los proyectos
 let projects = ref([]);
 let newProject = ref({
   title: '',
@@ -20,11 +21,12 @@ let newProject = ref({
 
 let showForm = ref(false);
 let errors = ref({});
+let selectedImage = ref(null);
+let showModal = ref(false);
 
-// Función para obtener los proyectos del usuario
 const fetchProjects = async () => {
   const config = {
-    headers: {Authorization: `Bearer ${userStore.token}`}
+    headers: { Authorization: `Bearer ${userStore.token}` }
   };
   try {
     const response = await axios.get('/api/v1/projects/', config);
@@ -110,7 +112,7 @@ const addProject = async () => {
 
 const deleteProject = async (id) => {
   const config = {
-    headers: {Authorization: `Bearer ${userStore.token}`}
+    headers: { Authorization: `Bearer ${userStore.token}` }
   };
   try {
     await axios.delete(`/api/v1/projects/${id}`, config);
@@ -122,7 +124,15 @@ const deleteProject = async (id) => {
   }
 };
 
-// Usar el hook onMounted para llamar a la función cuando el componente se monte
+const openImageModal = (imageUrl) => {
+  selectedImage.value = imageUrl;
+  showModal.value = true;
+};
+
+const closeImageModal = () => {
+  showModal.value = false;
+};
+
 onMounted(() => {
   fetchProjects();
   selectStore.fetchAllSelectOptionsEnums();
@@ -164,7 +174,7 @@ onMounted(() => {
         <label>Avatar:</label>
         <input type="file"
                id="avatar"
-               @change="handleFileUpload" required/>
+               @change="handleFileUpload" />
         <p class="error" v-if="errors.img_url">{{ errors.img_url }}</p>
 
         <button class="form__button" type="submit">Agregar Proyecto</button>
@@ -175,7 +185,7 @@ onMounted(() => {
     <div class="projects-section">
       <div v-for="project in projects.slice().reverse()" :key="project.id" class="project">
         <div class="project-content-image">
-          <img :src="project.image_url" alt="Imagen del proyecto" class="project-image">
+          <img :src="project.image_url" alt="Imagen del proyecto" class="project-image" @click="openImageModal(project.image_url)" />
         </div>
         <div class="project-info">
           <div class="project-header">
@@ -193,6 +203,8 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <!-- Uso del componente de modal de imagen -->
+    <ImageModal :show="showModal" :imageUrl="selectedImage" @close="closeImageModal" />
   </section>
 </template>
 
