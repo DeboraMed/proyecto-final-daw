@@ -1,8 +1,10 @@
 import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import Home from "../pages/Home.vue";
+import authGuard from "./guard.js";
+import {useUserStore} from "../stores/UserStore.js";
 
 const routes = [
-    {   /*rutas anidadas*/
+    {
         path: '/',
         component: Home,
         children: [
@@ -12,7 +14,7 @@ const routes = [
             }
         ]
     },
-    {   /*lazy loading*/
+    {
         path: '/encuentra',
         component: () => import('../pages/Encuentra.vue')
     },
@@ -26,11 +28,13 @@ const routes = [
     },
     {
         path: '/recluta',
-        component: () => import('../pages/Recluta.vue')
+        component: () => import('../pages/Recluta.vue'),
+        beforeEnter: authGuard
     },
     {
         path: '/portfolio/:id?',
-        component: () => import('../pages/Portfolio.vue')
+        component: () => import('../pages/Portfolio.vue'),
+        beforeEnter: authGuard
     },
     {
         path: '/empresa/:id',
@@ -39,31 +43,49 @@ const routes = [
     {
         path: '/login',
         component: () => import('../pages/Login.vue')
-    },   {
+    },
+    {
         path: '/registro',
         component: () => import('../pages/Registro.vue')
     },
     {
         path: '/perfil',
-        component: () => import('../pages/Perfil.vue')
+        component: () => import('../pages/Perfil.vue'),
+        beforeEnter: authGuard
     },
     {
         path: '/match',
-        component: () => import('../pages/Match.vue')
+        component: () => import('../pages/Match.vue'),
+        beforeEnter: authGuard
     },
     {
         path: '/contacto',
         component: () => import('../pages/Contacto.vue')
     },
     {
-        path: '/:pathMach(.*)*',
+        path: '/:pathMatch(.*)*',
         component: () => import('../pages/404.vue')
     },
-]
+];
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
-})
+});
 
-export default router
+// guard global
+router.beforeEach((to, from, next) => {
+    const userStore = useUserStore();
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (userStore.isLogged()) {
+            next();
+        } else {
+            next('/login');
+        }
+    } else {
+        next();
+    }
+});
+
+export default router;

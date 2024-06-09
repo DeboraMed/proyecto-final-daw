@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       isMenuOpen: false,
-      openBurguerMenu: false,
+      openBurgerMenu: false,
       windowSmall: false,
     }
   },
@@ -86,7 +86,7 @@ export default {
       </div>
       <!-- Menu hamburguesa-->
       <ul v-else class="burger__menu">
-        <li v-if="openBurguerMenu" class="burger__menu__items">
+        <li v-if="openBurgerMenu" class="burger__menu__items">
           <button v-show="isMenuOpen" class="navbar__toggle" @click="toggleMenu">☰</button>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/encuentra">Encuentra desarrolladores</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/inspiracion">Inspiración</router-link>
@@ -132,17 +132,18 @@ export default {
   right: 5px;
   margin: 0 15px 0 0;
   font-weight: bold;
-  background-color: var(--burguer-bg-color);
+  color: var(--burguer-bg-color);
 }
 
 .burger__menu__items {
   padding: 1rem;
   display: none;
+  background-color: var(--bg-color-clear);
 }
 
 .burger__button {
   background: none;
-  color: #2E2067;
+  color: var(--a-color);
   border: none;
   font-size: 2rem;
   cursor: pointer;
@@ -152,14 +153,12 @@ export default {
   color: var(--font-color);
 }
 
-/* barra de navegacion */
 .nav {
   z-index: 3;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  /*height: 5.5rem;*/
   background-color: var(--bg-color-clear);
   display: flex;
   flex-wrap: nowrap;
