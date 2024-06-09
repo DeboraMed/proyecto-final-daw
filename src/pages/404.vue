@@ -1,17 +1,14 @@
 <script setup>
-
 </script>
 
 <template>
-  <body>
   <div class="main__content__404">
     <div class="content__404">
-      <h1>404</h1>
+      <h1 class="pulse">404</h1>
       <h2>Not Found</h2>
       <p>El enlace solicitado no existe en este dominio.</p>
     </div>
   </div>
-  </body>
 </template>
 
 <style scoped>
@@ -39,9 +36,10 @@ body {
 
 h1 {
   margin: 0;
-  font-size: 150px;
+  font-size: 180px;
   line-height: 150px;
   font-weight: bold;
+  animation: pulse 1.5s infinite;
 }
 
 h2 {
@@ -49,4 +47,16 @@ h2 {
   font-size: 30px;
 }
 
+/* animación */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>

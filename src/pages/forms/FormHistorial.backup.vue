@@ -89,7 +89,6 @@ export default {
       this.isFormValid = true
       this.userStore.editProfile(this.user);
     }
-    // TODO: Terminar componentes formulario
   },
 }
 </script>

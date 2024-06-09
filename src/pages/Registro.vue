@@ -34,21 +34,21 @@ export default {
       this.errors = {};
 
       if (!this.user.name || typeof this.user.name !== 'string' || this.user.name.length < 3) {
-        this.errors.name = 'Introduce un nombre con al menos 3 caracteres.';
+        this.errors.name = 'Por favor,introduce un nombre con al menos 3 caracteres.';
       } else if (!this.user.email || !/\w+@\w+\.+[a-z]/.test(this.user.email)) {
-        this.errors.email = 'Introduce un correo electrónico válido.';
+        this.errors.email = 'Por favor,introduce un correo electrónico válido.';
       } else if (!this.user.password || this.user.password.length < 7) {
-        this.errors.password = 'Introduce un contraseña con al menos 8 caracteres.';
+        this.errors.password = 'Por favor,introduce un contraseña con al menos 8 caracteres.';
       } else if (!this.user.description) {
-        this.errors.description = 'La descripción es requerida.';
+        this.errors.description = 'Por favor,la descripción es requerida.';
       } else if (!this.user.phone) {
-        this.errors.phone = 'El teléfono es requerido.';
+        this.errors.phone = 'Por favor,el teléfono es requerido.';
       } else if (!this.user.address) {
-        this.errors.address = 'La dirección es requerida.';
+        this.errors.address = 'Por favor,la dirección es requerida.';
       } else if (!this.user.avatar) {
-        this.errors.avatar = 'El avatar es requerido.';
+        this.errors.avatar = 'Por favor,el avatar es requerido.';
       } else if (!this.user.user_type) {
-        this.errors.user_type = 'Por favor, selecciona si eres un desarrollador o una empresa.';
+        this.errors.user_type = 'Por favor,por favor, selecciona si eres un desarrollador o una empresa.';
       }
       if (Object.keys(this.errors).length === 0) {
         this.submitForm();

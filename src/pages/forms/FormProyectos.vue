@@ -2,10 +2,14 @@
 
 import {useUserStore} from "../../stores/UserStore.js";
 import {useSelectStore} from "../../stores/SelectStore.js";
+import {useAlertStore} from "../../stores/AlertStore.js";
+
 import {onMounted, ref} from "vue";
 import axios from "axios";
+
 const userStore = useUserStore();
 const selectStore = useSelectStore();
+const alertStore = useAlertStore();
 
 // Definir una ref para almacenar los proyectos
 let projects = ref([]);
@@ -28,6 +32,7 @@ const fetchProjects = async () => {
     projects.value = response.data.projects;
   } catch (error) {
     console.error('Error al recuperar los proyectos:', error);
+    alertStore.error('Error al recuperar los proyectos.');
   }
 };
 
@@ -65,6 +70,7 @@ const addProject = async () => {
     showForm.value = false;
   } catch (error) {
     console.error('Error al agregar el proyecto:', error);
+    alertStore.error('Error al agregar el proyecto.');
   }
 };
 
@@ -77,6 +83,7 @@ const deleteProject = async (id) => {
     projects.value = projects.value.filter(project => project.id !== id);
   } catch (error) {
     console.error('Error al eliminar el proyecto:', error);
+    alertStore.error('Error al eliminar el proyecto.');
   }
 };
 

@@ -1,14 +1,11 @@
 <script setup>
 
-import {useUserStore} from "../stores/UserStore.js";
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import {useRoute} from "vue-router";
 
-// Definir una ref para almacenar los proyectos
 let company = ref();
 
-// Función para obtener los proyectos del usuario
 const fetchCompany = async (companyId) => {
 
   try {
@@ -19,7 +16,6 @@ const fetchCompany = async (companyId) => {
   }
 };
 
-// Usar el hook onMounted para llamar a la función cuando el componente se monte
 onMounted(() => {
   const route = useRoute();
   fetchCompany(route.params.id);
@@ -42,7 +38,6 @@ onMounted(() => {
             <p>{{ company.user['phone'] }}</p>
             <p>{{ company.user['address'] }}</p>
             <p class="github-link">{{company.user['email']}}</p>
-<!--        <a :href="company.user['email']" target="#" @click="" class="github-link">{{company.user['email']}}</a>-->
           </div>
         </div>
         <!-- Vacantes de la empresa -->
@@ -84,8 +79,6 @@ h2 {
   max-width: 1200px;
   background-color: #fff;
   padding: 20px;
-  //border: #ccc solid 1px;
-  //box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 1px;
   text-align: left;
 }

@@ -1,13 +1,12 @@
 <script>
-
-import {useUserStore} from '../stores/UserStore.js';
-import {useSelectStore} from "../stores/SelectStore.js";
+import { useUserStore } from '../stores/UserStore.js';
+import { useSelectStore } from "../stores/SelectStore.js";
 import FormFormacion from "./forms/FormFormacion.vue";
 import FormExperiencia from "./forms/FormExperiencia.vue";
 import FormProyectos from "./forms/FormProyectos.vue";
 
 export default {
-  components: {FormProyectos, FormFormacion,FormExperiencia},
+  components: { FormProyectos, FormFormacion, FormExperiencia },
   setup() {
     const selectStore = useSelectStore();
     const userStore = useUserStore();
@@ -20,23 +19,12 @@ export default {
   data() {
     return {
       userData: null,
-      /* Info que carga en los select */
-      /* Payload de edicion TODO: manejar la edicion de la info base del perfil */
       user: {
-        /*  name: '',
-          email: '',
-          password: '',
-          user_type: '',
-          description: '',
-          phone: '',
-          address: '',
-          avatar: '',*/
         userable: {
           specialization: '',
           schedule: '',
           work_mode: '',
           contract_type: '',
-          //github_url: '',
         }
       },
       errors: {},
@@ -44,10 +32,7 @@ export default {
     }
   },
   async created() {
-    // Refresca los valores para listas 'select'
     await this.selectStore.fetchAllSelectOptionsEnums();
-
-    // trae al usuario con sus datos
     await this.userStore.fetchUser();
     this.userData = this.userStore.userData;
   },
@@ -55,7 +40,13 @@ export default {
     validateForm() {
       this.errors = {};
 
-      if (!this.userData.userable.contract_type) {
+      if (!this.userData.description) {
+        this.errors.description = 'Por favor,la descripción es requerida.';
+      } else if (!this.userData.phone) {
+        this.errors.phone = 'Por favor,el teléfono es requerido.';
+      } else if (!this.userData.address) {
+        this.errors.address = 'Por favor,la dirección es requerida.';
+      } else if (!this.userData.userable.contract_type) {
         this.errors.contract_type = 'Por favor, selecciona un tipo de contrato.';
       } else if (!this.userData.userable.schedule) {
         this.errors.schedule = 'Por favor, selecciona un tipo de jornada.';
@@ -64,15 +55,15 @@ export default {
       } else if (!this.userData.userable.work_mode) {
         this.errors.work_mode = 'Por favor, selecciona una modalidad.';
       }
+
       if (Object.keys(this.errors).length === 0) {
         this.submitForm();
       }
     },
     submitForm() {
-      this.isFormValid = true
+      this.isFormValid = true;
       this.userStore.editProfile(this.userData);
     }
-    // TODO: limpiar el codigo repetido
   },
 }
 </script>
@@ -96,35 +87,35 @@ export default {
         </div>
       </article>
 
-      <div v-if="userStore.user_type==='developer'">
+      <div v-if="userStore.user_type === 'developer'">
         <div class="tabs">
-          <!-- Primera tab-->
+          <!-- Primera tab -->
           <div class="tab-2">
             <label for="tab2-1">Información Personal</label>
             <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
             <div v-if="userData && userData.userable">
               <form class="form__perfil" @submit.prevent="validateForm">
-
                 <h2>Detalle de Perfil</h2>
 
                 <p>Descripción de Perfil</p>
-                <input type="text"
-                       id="description"
-                       v-model="userData.description"
-                       placeholder="Descripción"/>
-
+                <textarea type="text"
+                          maxlength="300"
+                          id="descripcion"
+                          v-model="userData.description"
+                          placeholder="Escribe una pequeña descripción..."/>
+                <p class="error" v-if="errors.description">{{ errors.description }}</p>
                 <p>Teléfono</p>
                 <input type="text"
                        id="phone"
                        v-model="userData.phone"
                        placeholder="Teléfono"/>
-
+                <p class="error" v-if="errors.phone">{{ errors.phone }}</p>
                 <p>Dirección física</p>
                 <input type="text"
                        id="address"
                        v-model="userData.address"
                        placeholder="Dirección"/>
-
+                <p class="error" v-if="errors.address">{{ errors.address }}</p>
                 <p>Perfil Publico de Github</p>
                 <input type="url"
                        id="github"
@@ -132,7 +123,7 @@ export default {
                        placeholder="Github URL"/>
 
                 <h2>Formulario de preferencias laborales</h2>
-                <!--<legend> Selecciona tus preferencias Laborales</legend>-->
+
                 <p>Tipo de contrato</p>
                 <select class="home__select"
                         v-model="userData.userable['contract_type']">
@@ -145,6 +136,7 @@ export default {
                   </option>
                 </select>
                 <p class="error" v-if="errors.contract_type">{{ errors.contract_type }}</p>
+
                 <p>Tipo de Jornada laboral</p>
                 <select class="home__select"
                         v-model="userData.userable['schedule']">
@@ -157,7 +149,8 @@ export default {
                   </option>
                 </select>
                 <p class="error" v-if="errors.schedule">{{ errors.schedule }}</p>
-                <p>Especialidad que mas se ajuste a tu perfil</p>
+
+                <p>Especialidad que más se ajuste a tu perfil</p>
                 <select class="home__select"
                         v-model="userData.userable['specialization']">
                   <option class="home__select__option" disabled value="">Selecciona una especialidad</option>
@@ -169,6 +162,7 @@ export default {
                   </option>
                 </select>
                 <p class="error" v-if="errors.specialization">{{ errors.specialization }}</p>
+
                 <p>Modalidad de trabajo</p>
                 <select class="home__select"
                         v-model="userData.userable['work_mode']">
@@ -181,13 +175,14 @@ export default {
                   </option>
                 </select>
                 <p class="error" v-if="errors.work_mode">{{ errors.work_mode }}</p>
+
                 <button type="submit" class="form__button">Añadir preferencias laborales</button>
               </form>
             </div>
           </div>
-          <!-- Segunda tab-->
+          <!-- Segunda tab -->
           <div class="tab-2">
-            <label for="tab2-2">Historial Academico / Profesional</label>
+            <label for="tab2-2">Historial Académico / Profesional</label>
             <input id="tab2-2" name="tabs-two" type="radio">
             <div>
               <form-formacion></form-formacion>
@@ -200,6 +195,7 @@ export default {
     </section>
   </main>
 </template>
+
 
 <style scoped>
 h2 {
@@ -340,14 +336,17 @@ select:focus {
 .profile-container {
   width: 90%;
   max-width: 1200px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   padding: 20px;
-  //border: #ccc solid 1px;
-  //box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 1px;
+  border-radius: 8px;
   text-align: left;
 }
-
+.error {
+  color: #e74c3c;
+  font-size: 0.875em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
 .profile-header {
   display: flex;
   align-items: center;
@@ -379,18 +378,29 @@ select:focus {
   color: #666;
 }
 
-.github-link {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff!important;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+input[type="text"],
+textarea,
+input[type="url"]{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.github-link:hover {
-  background-color: #555;
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 1rem;
 }
+
+textarea {
+  height: 80px;
+  resize: none;
+}
+
 </style>
